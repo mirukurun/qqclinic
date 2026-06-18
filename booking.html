@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Appointment — Queens Qoncept Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="booking" class="page-enter">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header header--opaque" id="header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="logo.png" alt="Queens Qoncept Clinic" class="header__logo-img" />
+    </a>
+    <nav class="header__nav">
+      <a href="index.html"        data-nav="home"        data-i18n="nav.home">Home</a>
+      <a href="services.html"     data-nav="services"    data-i18n="nav.services">Services</a>
+      <a href="specialists.html"  data-nav="specialists" data-i18n="nav.specialists">Specialists</a>
+      <a href="about.html"        data-nav="about"       data-i18n="nav.about">About</a>
+      <a href="gallery.html"      data-nav="gallery"     data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html"      data-nav="contact"     data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header__right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="sv">SV</button>
+      </div>
+    </div>
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html"       data-i18n="nav.home">Home</a>
+  <a href="services.html"    data-i18n="nav.services">Services</a>
+  <a href="specialists.html" data-i18n="nav.specialists">Specialists</a>
+  <a href="about.html"       data-i18n="nav.about">About</a>
+  <a href="gallery.html"     data-i18n="nav.gallery">Gallery</a>
+  <a href="contact.html"     data-i18n="nav.contact">Contact</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="label" data-i18n="booking.label">Schedule your visit</span>
+    <div style="height:0.75rem;"></div>
+    <h1 class="title-xl serif" data-i18n="booking.title">Book your appointment</h1>
+    <div class="gold-rule"></div>
+    <p style="font-size:0.88rem;color:var(--text-muted);max-width:480px;line-height:1.75;" data-i18n="booking.sub">Select a service or specialist, choose a date and time, and confirm your booking.</p>
+  </div>
+</div>
+
+<!-- ═══ BOOKING FLOW ═══ -->
+<section class="section section--white">
+  <div class="container">
+    <div class="booking-wrap">
+
+      <!-- TABS -->
+      <div class="booking-tabs">
+        <button class="booking-tab active" id="tabSvc" onclick="setMode('service')" data-i18n="booking.byService">Book by service</button>
+        <button class="booking-tab" id="tabSp" onclick="setMode('specialist')" data-i18n="booking.bySpecialist">Book by specialist</button>
+      </div>
+
+      <!-- STEPPER -->
+      <div class="booking-stepper">
+        <div class="step-node">
+          <div class="step-circle active" id="dot1">1</div>
+          <span class="step-text active" id="lbl1" data-i18n="step.service">Service</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-node">
+          <div class="step-circle" id="dot2">2</div>
+          <span class="step-text" id="lbl2" data-i18n="step.specialist">Specialist</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-node">
+          <div class="step-circle" id="dot3">3</div>
+          <span class="step-text" id="lbl3" data-i18n="step.datetime">Date &amp; Time</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-node">
+          <div class="step-circle" id="dot4">4</div>
+          <span class="step-text" id="lbl4" data-i18n="step.confirm">Confirm</span>
+        </div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="booking-step active" id="step1">
+        <p id="hint1" style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;letter-spacing:0.04em;" data-i18n="step1.hint.svc">Select a service to begin</p>
+        <div id="step1Content" class="options-grid"></div>
+        <div class="step-actions">
+          <span></span>
+          <button class="btn btn-primary" onclick="goStep(2)" data-i18n="btn.continue">Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="booking-step" id="step2">
+        <p id="hint2" style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;letter-spacing:0.04em;" data-i18n="step2.hint.svc">Choose a specialist for this service</p>
+        <div id="step2Content" class="options-grid options-grid--2col"></div>
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="goStep(1)" data-i18n="btn.back">Back</button>
+          <button class="btn btn-primary" onclick="goStep(3)" data-i18n="btn.continue">Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="booking-step" id="step3">
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;letter-spacing:0.04em;" data-i18n="step3.hint">Choose a date and time</p>
+        <div class="booking-calendar-wrap">
+          <div>
+            <div class="cal-nav">
+              <button class="btn btn-ghost btn-sm" onclick="prevMonth()">&#8592;</button>
+              <span class="cal-title" id="calTitle"></span>
+              <button class="btn btn-ghost btn-sm" onclick="nextMonth()">&#8594;</button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+          <div>
+            <p class="time-label" data-i18n="avail.times">Available times</p>
+            <div class="time-grid" id="timeGrid"></div>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="goStep(2)" data-i18n="btn.back">Back</button>
+          <button class="btn btn-primary" onclick="goStep(4)" data-i18n="btn.continue">Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="booking-step" id="step4">
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;letter-spacing:0.04em;" data-i18n="step4.hint">Review and confirm your booking</p>
+        <div class="booking-summary">
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="summary.service">Service</span>
+            <span class="summary-value" id="sumSvc">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="summary.specialist">Specialist</span>
+            <span class="summary-value" id="sumSp">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="summary.date">Date</span>
+            <span class="summary-value" id="sumDate">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label" data-i18n="summary.time">Time</span>
+            <span class="summary-value" id="sumTime">—</span>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="goStep(3)" data-i18n="btn.back">Back</button>
+          <button class="btn btn-primary" onclick="confirm()" data-i18n="btn.confirm">Confirm booking</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('confirmModal')">&times;</button>
+    <span class="label label--gold" data-i18n="modal.label">Booking confirmed</span>
+    <div style="height:0.75rem;"></div>
+    <h2 class="title-md serif" data-i18n="modal.title">Your appointment is set.</h2>
+    <div class="gold-rule"></div>
+    <div id="modalDetails" style="font-size:0.85rem;color:var(--text-muted);line-height:1.85;margin-bottom:1.5rem;"></div>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2rem;" data-i18n="modal.note">A confirmation will be sent to your email. We look forward to welcoming you.</p>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal('confirmModal')" data-i18n="modal.close">Done</button>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <img src="logo.png" alt="Queens Qoncept Clinic" class="footer__logo-img" />
+        <p class="footer__tagline" data-i18n="footer.tagline">Beauty, aesthetics and care in one concept.</p>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col1">Services</p>
+        <ul class="footer__links">
+          <li><a href="services.html#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a></li>
+          <li><a href="services.html#facials" data-i18n="cat.facials">Facials</a></li>
+          <li><a href="services.html#peels" data-i18n="cat.peels">Peels</a></li>
+          <li><a href="services.html#massage" data-i18n="cat.massage">Massage</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col2">Navigate</p>
+        <ul class="footer__links">
+          <li><a href="specialists.html" data-i18n="nav.specialists">Specialists</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-i18n="footer.copy">© 2026 Queens Qoncept Clinic. All rights reserved.</span>
+      <div class="footer__carpet">
+        <div class="footer__carpet-line"></div>
+        <span class="footer__carpet-text" data-i18n="footer.carpet">Signature red carpet</span>
+        <div class="footer__carpet-line"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+  /* ─── DATA ─── */
+  const SPECIALISTS = [
+    { id:1, name:'Ludmila', role:'Head Cosmetologist', services:['Packages & Offers','Aesthetic Treatments','PRX-T33','Facials','Peels','Insculpt Chair'] },
+    { id:2, name:'Olena',   role:'Massage Therapist',  services:['Massage'] },
+    { id:3, name:'Caroline',role:'Cosmetologist',      services:['Facials','Peels','Brows & Lashes','Milia Removal'] }
+  ];
+  const ALL_SERVICES = [
+    { key:'Packages & Offers',    sub:'Special offers and treatment bundles' },
+    { key:'Aesthetic Treatments', sub:'Dermapen microneedling' },
+    { key:'PRX-T33',              sub:'Biorevitalisation without needles' },
+    { key:'Facials',              sub:'Deep cleansing, multi facial, anti-age' },
+    { key:'Peels',                sub:'Retinol, AHA, Lumilight, Rejuv, Purify' },
+    { key:'Brows & Lashes',       sub:'Brow shaping & tinting' },
+    { key:'Massage',              sub:'Raindrop aromatherapy massage' },
+    { key:'Insculpt Chair',       sub:'Electromagnetic muscle stimulation' },
+    { key:'Milia Removal',        sub:'Professional extraction' }
+  ];
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const TIMES = ['09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00'];
+  const UNAVAIL = [1,4,7,11];
+
+  /* ─── STATE ─── */
+  let mode = 'service';
+  let data = { service:null, specialistId:null, specialist:null, date:null, time:null };
+  let step = 1;
+  let calY, calM;
+
+  /* ─── MODE ─── */
+  function setMode(m) {
+    mode = m;
+    data = { service:null, specialistId:null, specialist:null, date:null, time:null };
+    document.getElementById('tabSvc').classList.toggle('active', m === 'service');
+    document.getElementById('tabSp').classList.toggle('active', m === 'specialist');
+    document.getElementById('lbl1').dataset.i18n = m === 'service' ? 'step.service' : 'step.specialist';
+    document.getElementById('lbl2').dataset.i18n = m === 'service' ? 'step.specialist' : 'step.service';
+    applyLanguage(currentLang);
+    goStep(1);
+  }
+
+  /* ─── STEP ─── */
+  function goStep(n) {
+    step = n;
+    document.querySelectorAll('.booking-step').forEach((s,i) => s.classList.toggle('active', i+1 === n));
+    updateStepper();
+    if (n === 1) renderStep1();
+    if (n === 2) renderStep2();
+    if (n === 3) renderCal();
+    if (n === 4) renderSummary();
+  }
+  function updateStepper() {
+    for (let i=1;i<=4;i++) {
+      const d = document.getElementById('dot'+i);
+      const l = document.getElementById('lbl'+i);
+      d.className = 'step-circle';
+      l.className = 'step-text';
+      if (i < step) { d.classList.add('done'); d.innerHTML='&#10003;'; l.classList.add('done'); }
+      else if (i === step) { d.classList.add('active'); d.textContent=i; l.classList.add('active'); }
+      else { d.textContent=i; }
+    }
+  }
+
+  /* ─── RENDER STEP 1 ─── */
+  function renderStep1() {
+    const c = document.getElementById('step1Content');
+    const h = document.getElementById('hint1');
+    if (mode === 'service') {
+      h.dataset.i18n = 'step1.hint.svc'; h.textContent = T[currentLang]['step1.hint.svc'];
+      c.style.gridTemplateColumns = '';
+      c.innerHTML = ALL_SERVICES.map(s =>
+        `<div class="option-card${data.service===s.key?' selected':''}" onclick="pick1Svc(this,'${s.key}')">
+          <div class="option-card__title">${s.key}</div>
+          <div class="option-card__sub">${s.sub}</div>
+        </div>`).join('');
+    } else {
+      h.dataset.i18n = 'step1.hint.sp'; h.textContent = T[currentLang]['step1.hint.sp'];
+      c.style.gridTemplateColumns = '1fr 1fr';
+      c.innerHTML = SPECIALISTS.map(sp =>
+        `<div class="option-card${data.specialistId===sp.id?' selected':''}" onclick="pick1Sp(this,${sp.id})">
+          <div class="option-card__title">${sp.name}</div>
+          <div class="option-card__sub">${sp.role}</div>
+        </div>`).join('');
+    }
+  }
+  function pick1Svc(el, key) {
+    document.querySelectorAll('#step1Content .option-card').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    data.service = key;
+    data.specialist = null; data.specialistId = null;
+  }
+  function pick1Sp(el, id) {
+    document.querySelectorAll('#step1Content .option-card').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    const sp = SPECIALISTS.find(s=>s.id===id);
+    data.specialistId = id; data.specialist = sp.name + ' — ' + sp.role;
+    data.service = null;
+  }
+
+  /* ─── RENDER STEP 2 ─── */
+  function renderStep2() {
+    const c = document.getElementById('step2Content');
+    const h = document.getElementById('hint2');
+    if (mode === 'service') {
+      h.dataset.i18n = 'step2.hint.svc'; h.textContent = T[currentLang]['step2.hint.svc'];
+      const avail = SPECIALISTS.filter(sp=>sp.services.includes(data.service));
+      if (!avail.length) {
+        c.style.gridTemplateColumns = '1fr';
+        c.innerHTML = `<div style="padding:2rem;font-size:0.85rem;color:var(--text-muted);grid-column:1/-1;">${T[currentLang]['no.avail']}</div>`;
+        return;
+      }
+      c.style.gridTemplateColumns = '1fr 1fr';
+      c.innerHTML = avail.map(sp =>
+        `<div class="option-card${data.specialistId===sp.id?' selected':''}" onclick="pick2Sp(this,${sp.id})">
+          <div class="option-card__title">${sp.name}</div>
+          <div class="option-card__sub">${sp.role}</div>
+        </div>`).join('');
+    } else {
+      h.dataset.i18n = 'step2.hint.sp'; h.textContent = T[currentLang]['step2.hint.sp'];
+      const sp = SPECIALISTS.find(s=>s.id===data.specialistId);
+      const svcs = sp ? ALL_SERVICES.filter(s=>sp.services.includes(s.key)) : [];
+      c.style.gridTemplateColumns = '';
+      c.innerHTML = svcs.map(s =>
+        `<div class="option-card${data.service===s.key?' selected':''}" onclick="pick2Svc(this,'${s.key}')">
+          <div class="option-card__title">${s.key}</div>
+          <div class="option-card__sub">${s.sub}</div>
+        </div>`).join('');
+    }
+  }
+  function pick2Sp(el, id) {
+    document.querySelectorAll('#step2Content .option-card').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    const sp = SPECIALISTS.find(s=>s.id===id);
+    data.specialistId = id; data.specialist = sp.name + ' — ' + sp.role;
+  }
+  function pick2Svc(el, key) {
+    document.querySelectorAll('#step2Content .option-card').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    data.service = key;
+  }
+
+  /* ─── CALENDAR ─── */
+  function renderCal() {
+    const now = new Date();
+    if (!calY) { calY = now.getFullYear(); calM = now.getMonth(); }
+    document.getElementById('calTitle').textContent = MONTHS[calM] + ' ' + calY;
+    const grid = document.getElementById('calGrid');
+    const days = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+    let html = days.map(d=>`<div class="cal-cell hdr">${d}</div>`).join('');
+    const firstDay = new Date(calY,calM,1).getDay();
+    const offset = firstDay===0?6:firstDay-1;
+    const total = new Date(calY,calM+1,0).getDate();
+    for (let i=0;i<offset;i++) html+=`<div class="cal-cell empty"></div>`;
+    for (let d=1;d<=total;d++) {
+      const past = new Date(calY,calM,d) < new Date(now.getFullYear(),now.getMonth(),now.getDate());
+      const sel = data.date===`${calY}-${calM+1}-${d}`;
+      html+=`<div class="cal-cell${past?' past':''}${sel?' selected':''}" ${!past?`onclick="pickDate(this,${calY},${calM+1},${d})"`:''} >${d}</div>`;
+    }
+    grid.innerHTML = html;
+    renderTimes();
+  }
+  function prevMonth() { if(--calM<0){calM=11;calY--;} renderCal(); }
+  function nextMonth() { if(++calM>11){calM=0;calY++;} renderCal(); }
+  function pickDate(el,y,m,d) {
+    document.querySelectorAll('.cal-cell').forEach(c=>c.classList.remove('selected'));
+    el.classList.add('selected');
+    data.date=`${y}-${m}-${d}`; data.time=null; renderTimes();
+  }
+  function renderTimes() {
+    const g = document.getElementById('timeGrid');
+    if (!data.date) { g.innerHTML=`<span style="font-size:0.75rem;color:var(--text-muted);grid-column:1/-1;" data-i18n="date.hint">${T[currentLang]['date.hint']}</span>`; return; }
+    g.innerHTML = TIMES.map((t,i)=>
+      `<div class="time-slot${UNAVAIL.includes(i)?' unavail':''}${data.time===t?' selected':''}" ${!UNAVAIL.includes(i)?`onclick="pickTime(this,'${t}')"`:''} >${t}</div>`
+    ).join('');
+  }
+  function pickTime(el,t) {
+    document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
+    el.classList.add('selected');
+    data.time = t;
+  }
+
+  /* ─── SUMMARY ─── */
+  function renderSummary() {
+    const f = v => v||`<span style="color:var(--beige-sand);">—</span>`;
+    const ds = data.date ? data.date.split('-').reverse().join('.') : null;
+    document.getElementById('sumSvc').innerHTML  = f(data.service);
+    document.getElementById('sumSp').innerHTML   = f(data.specialist);
+    document.getElementById('sumDate').innerHTML = f(ds);
+    document.getElementById('sumTime').innerHTML = f(data.time);
+  }
+
+  function confirm() {
+    const lines = [
+      data.service    ? `<strong>${T[currentLang]['summary.service']}:</strong> ${data.service}` : '',
+      data.specialist ? `<strong>${T[currentLang]['summary.specialist']}:</strong> ${data.specialist}` : '',
+      data.date       ? `<strong>${T[currentLang]['summary.date']}:</strong> ${data.date.split('-').reverse().join('.')}` : '',
+      data.time       ? `<strong>${T[currentLang]['summary.time']}:</strong> ${data.time}` : '',
+    ].filter(Boolean);
+    document.getElementById('modalDetails').innerHTML = lines.join('<br>');
+    openModal('confirmModal');
+    data = { service:null, specialistId:null, specialist:null, date:null, time:null };
+    setMode(mode);
+  }
+
+  // Init
+  renderStep1();
+
+  // If arriving from specialists page with ?specialist=Name — pre-select and jump to step 2
+  (function initFromURL() {
+    const spParam = new URLSearchParams(location.search).get('specialist');
+    if (!spParam) return;
+    const match = SPECIALISTS.find(s => s.name.toLowerCase() === spParam.toLowerCase());
+    if (!match) return;
+
+    mode = 'specialist';
+    document.getElementById('tabSvc').classList.remove('active');
+    document.getElementById('tabSp').classList.add('active');
+    document.getElementById('lbl1').dataset.i18n = 'step.specialist';
+    document.getElementById('lbl2').dataset.i18n = 'step.service';
+    if (typeof applyLanguage === 'function') applyLanguage(currentLang);
+
+    data.specialistId = match.id;
+    data.specialist = match.name + ' — ' + match.role;
+    goStep(2);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Specialists — Queens Qoncept Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="specialists" class="page-enter">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header header--opaque" id="header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="logo.png" alt="Queens Qoncept Clinic" class="header__logo-img" />
+    </a>
+    <nav class="header__nav">
+      <a href="index.html"        data-nav="home"        data-i18n="nav.home">Home</a>
+      <a href="services.html"     data-nav="services"    data-i18n="nav.services">Services</a>
+      <a href="specialists.html"  data-nav="specialists" data-i18n="nav.specialists">Specialists</a>
+      <a href="about.html"        data-nav="about"       data-i18n="nav.about">About</a>
+      <a href="gallery.html"      data-nav="gallery"     data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html"      data-nav="contact"     data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header__right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="sv">SV</button>
+      </div>
+      <a href="booking.html" class="btn btn-primary btn-sm" data-i18n="nav.book">Book appointment</a>
+    </div>
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html"       data-i18n="nav.home">Home</a>
+  <a href="services.html"    data-i18n="nav.services">Services</a>
+  <a href="specialists.html" data-i18n="nav.specialists">Specialists</a>
+  <a href="about.html"       data-i18n="nav.about">About</a>
+  <a href="gallery.html"     data-i18n="nav.gallery">Gallery</a>
+  <a href="contact.html"     data-i18n="nav.contact">Contact</a>
+  <a href="booking.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" data-i18n="nav.book">Book appointment</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="label" data-i18n="specialists.label">Our team</span>
+    <div style="height:0.75rem;"></div>
+    <h1 class="title-xl serif" data-i18n="specialists.title">The Specialists</h1>
+    <div class="gold-rule"></div>
+    <p style="font-size:0.88rem;color:var(--text-muted);max-width:480px;line-height:1.75;" data-i18n="specialists.sub">Each specialist brings expertise, care and a personalised approach to every session.</p>
+  </div>
+</div>
+
+<!-- ═══ PROFILES ═══ -->
+<section class="section section--white">
+  <div class="container">
+
+    <!-- LUDMILA -->
+    <div class="specialist-profile" id="ludmila">
+      <div class="specialist-photo">
+        <div class="specialist-photo__placeholder" style="background:linear-gradient(160deg,#E0D5C8 0%,#CDBFAF 100%);aspect-ratio:3/4;">
+          <img
+            src="images/ludmila.jpg"
+            alt="Ludmila"
+            style="width:100%;height:100%;object-fit:cover;"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="specialist-photo__gold-frame"></div>
+      </div>
+      <div class="specialist-info">
+        <div class="label label--gold" style="margin-bottom:0.75rem;">01 / 03</div>
+        <h2 class="specialist-name">Ludmila</h2>
+        <p class="specialist-role">Head Cosmetologist &amp; Founder</p>
+        <p class="specialist-bio">Ludmila founded Queens Qoncept Clinic after years of building a loyal client base through her work at Beauty by Ludmila Stockholm. Known for her precise, personalised approach and exceptional results, she now leads the clinic's cosmetology team.</p>
+        <p class="specialist-bio">With deep expertise in advanced skin treatments, PRX-T33 and microneedling, Ludmila focuses on visible results delivered in a calm, professional environment.</p>
+        <div class="specialist-meta">
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.exp">Experience</span>
+            <span class="specialist-meta-value">7+ years</span>
+          </div>
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.lang">Languages</span>
+            <span class="specialist-meta-value">Swedish, Russian, English</span>
+          </div>
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.spec">Specialises in</span>
+            <span class="specialist-meta-value">Aesthetic treatments, PRX-T33, Facials, Peels</span>
+          </div>
+        </div>
+        <div class="specialist-services-list">
+          <span class="specialist-service-tag">Dermapen</span>
+          <span class="specialist-service-tag">PRX-T33</span>
+          <span class="specialist-service-tag">Multi Facial</span>
+          <span class="specialist-service-tag">Deep Cleansing Facial</span>
+          <span class="specialist-service-tag">Peels</span>
+          <span class="specialist-service-tag">Insculpt Chair</span>
+        </div>
+        <a href="booking.html?specialist=Ludmila" class="btn btn-primary">
+          <span data-i18n="specialist.book">Book with</span>&nbsp;Ludmila
+        </a>
+      </div>
+    </div>
+
+    <!-- OLENA -->
+    <div class="specialist-profile specialist-profile--reverse" id="olena">
+      <div class="specialist-photo">
+        <div class="specialist-photo__placeholder" style="background:linear-gradient(160deg,#D5CCC0 0%,#C4B5A5 100%);aspect-ratio:3/4;">
+          <img
+            src="images/olena.jpg"
+            alt="Olena"
+            style="width:100%;height:100%;object-fit:cover;"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="specialist-photo__gold-frame" style="bottom:auto;top:-1rem;right:auto;left:-1rem;"></div>
+      </div>
+      <div class="specialist-info">
+        <div class="label label--gold" style="margin-bottom:0.75rem;">02 / 03</div>
+        <h2 class="specialist-name">Olena</h2>
+        <p class="specialist-role">Massage Therapist</p>
+        <p class="specialist-bio">Olena specialises in therapeutic and aromatherapy massage, with a particular focus on the Raindrop technique — a deeply relaxing sequence using Young Living essential oils applied along the spine and reflex points.</p>
+        <p class="specialist-bio">Her sessions are known for their restorative quality — leaving clients genuinely rested, balanced and renewed. Olena brings a precise yet intuitive touch to every treatment.</p>
+        <div class="specialist-meta">
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.exp">Experience</span>
+            <span class="specialist-meta-value">5+ years</span>
+          </div>
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.lang">Languages</span>
+            <span class="specialist-meta-value">Ukrainian, Russian, English</span>
+          </div>
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.spec">Specialises in</span>
+            <span class="specialist-meta-value">Raindrop Massage, Aromatherapy</span>
+          </div>
+        </div>
+        <div class="specialist-services-list">
+          <span class="specialist-service-tag">Raindrop Massage</span>
+          <span class="specialist-service-tag">Aromatherapy</span>
+        </div>
+        <a href="booking.html?specialist=Olena" class="btn btn-primary">
+          <span data-i18n="specialist.book">Book with</span>&nbsp;Olena
+        </a>
+      </div>
+    </div>
+
+    <!-- CAROLINE -->
+    <div class="specialist-profile" id="caroline">
+      <div class="specialist-photo">
+        <div class="specialist-photo__placeholder" style="background:linear-gradient(160deg,#CBBDB0 0%,#BAA898 100%);aspect-ratio:3/4;">
+          <img
+            src="images/caroline.jpg"
+            alt="Caroline"
+            style="width:100%;height:100%;object-fit:cover;"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div class="specialist-photo__gold-frame"></div>
+      </div>
+      <div class="specialist-info">
+        <div class="label label--gold" style="margin-bottom:0.75rem;">03 / 03</div>
+        <h2 class="specialist-name">Caroline</h2>
+        <p class="specialist-role">Cosmetologist</p>
+        <p class="specialist-bio">Caroline brings a meticulous, client-focused approach to every session. Her work centres around personalised skin protocols, combining deep cleansing with targeted treatments that address each client's unique skin concerns.</p>
+        <p class="specialist-bio">She is particularly skilled in brow design and anti-ageing treatments, and is known for her calm, reassuring presence and lasting results.</p>
+        <div class="specialist-meta">
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.exp">Experience</span>
+            <span class="specialist-meta-value">6+ years</span>
+          </div>
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.lang">Languages</span>
+            <span class="specialist-meta-value">Swedish, English</span>
+          </div>
+          <div class="specialist-meta-row">
+            <span class="specialist-meta-label" data-i18n="specialist.spec">Specialises in</span>
+            <span class="specialist-meta-value">Facials, Peels, Brows &amp; Lashes</span>
+          </div>
+        </div>
+        <div class="specialist-services-list">
+          <span class="specialist-service-tag">Classic Facial</span>
+          <span class="specialist-service-tag">Anti-Age Gold Mask</span>
+          <span class="specialist-service-tag">AHA Peel</span>
+          <span class="specialist-service-tag">Retinol Peeling</span>
+          <span class="specialist-service-tag">Brow Shaping</span>
+          <span class="specialist-service-tag">Milia Removal</span>
+        </div>
+        <a href="booking.html?specialist=Caroline" class="btn btn-primary">
+          <span data-i18n="specialist.book">Book with</span>&nbsp;Caroline
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section section--beige">
+  <div class="container">
+    <div class="cta-strip" style="padding:4rem 0;">
+      <h2 class="title-lg serif" style="margin-bottom:1rem;" data-i18n="home.cta.title">Book your appointment</h2>
+      <p style="font-size:0.88rem;color:var(--text-muted);max-width:380px;margin:0 auto 2.5rem;line-height:1.75;" data-i18n="home.cta.sub">Choose your service, select a specialist and find a time that suits you.</p>
+      <a href="booking.html" class="btn btn-primary btn-lg" data-i18n="nav.book">Book appointment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <img src="logo.png" alt="Queens Qoncept Clinic" class="footer__logo-img" />
+        <p class="footer__tagline" data-i18n="footer.tagline">Beauty, aesthetics and care in one concept.</p>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col1">Services</p>
+        <ul class="footer__links">
+          <li><a href="services.html#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a></li>
+          <li><a href="services.html#prx">PRX-T33</a></li>
+          <li><a href="services.html#facials" data-i18n="cat.facials">Facials</a></li>
+          <li><a href="services.html#peels" data-i18n="cat.peels">Peels</a></li>
+          <li><a href="services.html#massage" data-i18n="cat.massage">Massage</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col2">Navigate</p>
+        <ul class="footer__links">
+          <li><a href="booking.html" data-i18n="nav.book">Book appointment</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-i18n="footer.copy">© 2026 Queens Qoncept Clinic. All rights reserved.</span>
+      <div class="footer__carpet">
+        <div class="footer__carpet-line"></div>
+        <span class="footer__carpet-text" data-i18n="footer.carpet">Signature red carpet</span>
+        <div class="footer__carpet-line"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

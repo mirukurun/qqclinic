@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Queens Qoncept Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="services" class="page-enter">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header header--opaque" id="header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="logo.png" alt="Queens Qoncept Clinic" class="header__logo-img" />
+    </a>
+    <nav class="header__nav">
+      <a href="index.html"        data-nav="home"        data-i18n="nav.home">Home</a>
+      <a href="services.html"     data-nav="services"    data-i18n="nav.services">Services</a>
+      <a href="specialists.html"  data-nav="specialists" data-i18n="nav.specialists">Specialists</a>
+      <a href="about.html"        data-nav="about"       data-i18n="nav.about">About</a>
+      <a href="gallery.html"      data-nav="gallery"     data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html"      data-nav="contact"     data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header__right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="sv">SV</button>
+      </div>
+      <a href="booking.html" class="btn btn-primary btn-sm" data-i18n="nav.book">Book appointment</a>
+    </div>
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html"       data-i18n="nav.home">Home</a>
+  <a href="services.html"    data-i18n="nav.services">Services</a>
+  <a href="specialists.html" data-i18n="nav.specialists">Specialists</a>
+  <a href="about.html"       data-i18n="nav.about">About</a>
+  <a href="gallery.html"     data-i18n="nav.gallery">Gallery</a>
+  <a href="contact.html"     data-i18n="nav.contact">Contact</a>
+  <a href="booking.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" data-i18n="nav.book">Book appointment</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="label" data-i18n="services.label">Treatments</span>
+    <h1 class="title-xl serif" data-i18n="services.title">Our Services</h1>
+    <div class="gold-rule"></div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES LIST ═══ -->
+<section class="section section--white">
+  <div class="container">
+    <div class="services-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="services-sidebar">
+        <nav class="services-sidebar__nav">
+          <a class="sidebar-link active" href="#packages" data-i18n="cat.packages">Packages</a>
+          <a class="sidebar-link" href="#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a>
+          <a class="sidebar-link" href="#prx">PRX-T33</a>
+          <a class="sidebar-link" href="#facials" data-i18n="cat.facials">Facials</a>
+          <a class="sidebar-link" href="#peels" data-i18n="cat.peels">Peels</a>
+          <a class="sidebar-link" href="#brows" data-i18n="cat.brows">Brows &amp; Lashes</a>
+          <a class="sidebar-link" href="#massage" data-i18n="cat.massage">Massage</a>
+        </nav>
+      </aside>
+
+      <!-- CONTENT -->
+      <div>
+
+        <!-- PACKAGES -->
+        <div class="service-category" id="packages">
+          <div class="service-category__header">
+            <h2 class="service-category__title" data-i18n="cat.packages">Packages &amp; Offers</h2>
+            <span class="service-category__count">5 offers</span>
+          </div>
+          <div class="service-row" style="position:relative;">
+            <div>
+              <div class="service-row__name">Microneedling + PRX-T33</div>
+              <div class="service-row__desc">Return visit combination treatment</div>
+            </div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">3 898 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Microneedling + PRX-T33 + Cryotherapy</div><div class="service-row__desc" style="color:var(--red);font-size:0.72rem;">New clients — special price</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 498 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-primary btn-sm">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">PRX-T33 Trial</div><div class="service-row__desc" style="color:var(--red);font-size:0.72rem;">First-time offer</div></div>
+            <div class="service-row__duration">35 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 499 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-primary btn-sm">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Insculpt Chair Trial</div><div class="service-row__desc" style="color:var(--red);font-size:0.72rem;">Introductory session</div></div>
+            <div class="service-row__duration">45 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">495 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-primary btn-sm">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Retinol Peeling 4-Pack</div><div class="service-row__desc">Series of four retinol peel sessions</div></div>
+            <div class="service-row__duration">30 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">4 796 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+        <!-- AESTHETIC -->
+        <div class="service-category" id="aesthetic">
+          <div class="service-category__header">
+            <h2 class="service-category__title" data-i18n="cat.aesthetic">Aesthetic Treatments</h2>
+            <span class="service-category__count">5 treatments</span>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Dermapen Face</div><div class="service-row__desc">Microneedling facial rejuvenation</div></div>
+            <div class="service-row__duration">45 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">2 598 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Dermapen Face &amp; Neck</div><div class="service-row__desc">Extended microneedling protocol</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">3 198 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Dermapen Face, Neck &amp; Décolletage</div><div class="service-row__desc">Full upper body microneedling</div></div>
+            <div class="service-row__duration">90 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">3 798 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Dermapen Décolletage</div><div class="service-row__desc">Targeted décolletage treatment</div></div>
+            <div class="service-row__duration">40 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">2 498 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Insculpt Chair Treatment</div><div class="service-row__desc">Electromagnetic muscle stimulation</div></div>
+            <div class="service-row__duration">40 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 495 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+        <!-- PRX-T33 -->
+        <div class="service-category" id="prx">
+          <div class="service-category__header">
+            <h2 class="service-category__title">PRX-T33</h2>
+            <span class="service-category__count">3 treatments</span>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">PRX-T33 Face</div><div class="service-row__desc">Biorevitalisation without needles</div></div>
+            <div class="service-row__duration">30 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">2 198 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">PRX-T33 Face &amp; Neck</div><div class="service-row__desc">Extended biorevitalisation</div></div>
+            <div class="service-row__duration">45 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">2 989 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">PRX-T33 Face, Neck &amp; Décolletage</div><div class="service-row__desc">Full upper body biorevitalisation</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">3 598 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+        <!-- FACIALS -->
+        <div class="service-category" id="facials">
+          <div class="service-category__header">
+            <h2 class="service-category__title" data-i18n="cat.facials">Facials</h2>
+            <span class="service-category__count">7 treatments</span>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Multi Facial Treatment</div><div class="service-row__desc">Personalised multi-step facial protocol</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">2 995 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Deep Cleansing Facial</div><div class="service-row__desc">Exuviance / Neostrata formulas</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 548 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Classic Facial</div><div class="service-row__desc">70-minute classic facial treatment</div></div>
+            <div class="service-row__duration">70 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 748 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Classic Facial Extended</div><div class="service-row__desc">90-minute indulgent facial treatment</div></div>
+            <div class="service-row__duration">90 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 798 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Anti-Age Gold Mask</div><div class="service-row__desc">With lash &amp; brow tinting</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 798 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Anti-Age Gold Mask Extended</div><div class="service-row__desc">90-minute anti-ageing protocol</div></div>
+            <div class="service-row__duration">90 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 898 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Milia Removal</div><div class="service-row__desc">Professional extraction of milia</div></div>
+            <div class="service-row__duration">30 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">598 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+        <!-- PEELS -->
+        <div class="service-category" id="peels">
+          <div class="service-category__header">
+            <h2 class="service-category__title" data-i18n="cat.peels">Peels</h2>
+            <span class="service-category__count">5 treatments</span>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Retinol Peeling</div><div class="service-row__desc">Cell renewal peel with retinol</div></div>
+            <div class="service-row__duration">30 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 498 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Lumilight Peel</div><div class="service-row__desc">Includes homecare kit</div></div>
+            <div class="service-row__duration">40 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 998 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Rejuv Peel</div><div class="service-row__desc">Includes homecare kit</div></div>
+            <div class="service-row__duration">40 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 998 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Purify Peel</div><div class="service-row__desc">Includes homecare kit</div></div>
+            <div class="service-row__duration">40 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 998 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">AHA Peel with Gold Mask</div><div class="service-row__desc">Exfoliating peel with luxury mask</div></div>
+            <div class="service-row__duration">30 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">799 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+        <!-- BROWS -->
+        <div class="service-category" id="brows">
+          <div class="service-category__header">
+            <h2 class="service-category__title" data-i18n="cat.brows">Brows &amp; Lashes</h2>
+            <span class="service-category__count">2 treatments</span>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Brow Tinting + Shaping + Plucking</div><div class="service-row__desc">Complete brow styling</div></div>
+            <div class="service-row__duration">15 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">500 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Anti-Age Gold Mask + Lash &amp; Brow Colour</div><div class="service-row__desc">Combined anti-age &amp; brow treatment</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 798 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+        <!-- MASSAGE -->
+        <div class="service-category" id="massage">
+          <div class="service-category__header">
+            <h2 class="service-category__title" data-i18n="cat.massage">Massage</h2>
+            <span class="service-category__count">1 treatment</span>
+          </div>
+          <div class="service-row">
+            <div><div class="service-row__name">Raindrop Massage</div><div class="service-row__desc">Aromatherapy massage with essential oils along the spine</div></div>
+            <div class="service-row__duration">60 <span data-i18n="min">min</span></div>
+            <div class="service-row__price">1 498 <span data-i18n="kr">kr</span></div>
+            <a href="booking.html" class="btn btn-ghost btn-sm" data-i18n="nav.book">Book</a>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /services-layout -->
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <img src="logo.png" alt="Queens Qoncept Clinic" class="footer__logo-img" />
+        <p class="footer__tagline" data-i18n="footer.tagline">Beauty, aesthetics and care in one concept.</p>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col1">Services</p>
+        <ul class="footer__links">
+          <li><a href="#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a></li>
+          <li><a href="#prx">PRX-T33</a></li>
+          <li><a href="#facials" data-i18n="cat.facials">Facials</a></li>
+          <li><a href="#peels" data-i18n="cat.peels">Peels</a></li>
+          <li><a href="#brows" data-i18n="cat.brows">Brows &amp; Lashes</a></li>
+          <li><a href="#massage" data-i18n="cat.massage">Massage</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col2">Navigate</p>
+        <ul class="footer__links">
+          <li><a href="specialists.html" data-i18n="nav.specialists">Specialists</a></li>
+          <li><a href="booking.html" data-i18n="nav.book">Book appointment</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-i18n="footer.copy">© 2026 Queens Qoncept Clinic. All rights reserved.</span>
+      <div class="footer__carpet">
+        <div class="footer__carpet-line"></div>
+        <span class="footer__carpet-text" data-i18n="footer.carpet">Signature red carpet</span>
+        <div class="footer__carpet-line"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+  // Sidebar active state on scroll
+  const cats = document.querySelectorAll('.service-category');
+  const links = document.querySelectorAll('.sidebar-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.sidebar-link[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  cats.forEach(c => observer.observe(c));
+</script>
+</body>
+</html>

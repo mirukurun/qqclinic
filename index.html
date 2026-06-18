@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queens Qoncept Clinic — Beauty & Aesthetic Clinic Stockholm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ─── HOME-ONLY ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 52% 48%;
+      padding-top: var(--header-h);
+      overflow: hidden;
+      background: var(--ivory);
+    }
+    .hero__left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem)) 5rem max(2rem, calc((100vw - var(--max-w)) / 2 + 2rem));
+      position: relative;
+    }
+    .hero__left::before {
+      content: '';
+      position: absolute;
+      left: max(2rem, calc((100vw - var(--max-w)) / 2 + 0.5rem));
+      top: 15%;
+      bottom: 15%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--red) 30%, var(--red) 70%, transparent);
+      opacity: 0.5;
+    }
+    .hero__label-wrap { padding-left: 1.5rem; }
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.05;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    /* line1 "Queens" + line2 "Qoncept" — одна строка */
+    .hero__title .line1 {
+      display: inline;
+      font-size: clamp(2.8rem, 5.2vw, 5rem);
+      letter-spacing: 0.06em;
+      font-style: normal;
+      color: var(--graphite);
+    }
+
+    .hero__title .line2 {
+      display: inline;
+      font-size: clamp(2.8rem, 5.2vw, 5rem);
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    /* line3 "Clinic" — отдельная строка, категория */
+    .hero__title .line3 {
+      display: block;
+      font-size: clamp(0.68rem, 1vw, 0.88rem);
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      font-weight: 400;
+      font-style: normal;
+      color: var(--text-muted);
+      margin-top: 0.9rem;
+    }
+    .hero__rule { margin-left: 1.5rem; }
+    .hero__sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 360px;
+      line-height: 1.8;
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero__cta {
+      display: flex;
+      gap: 1rem;
+      padding-left: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .hero__right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .hero__img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, var(--beige-light) 0%, var(--beige-sand) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero__red-strip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--red);
+    }
+
+    .brand-strip {
+      padding: 5rem 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--beige-light);
+    }
+    .brand-strip__inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+    .brand-strip__text {}
+    .brand-strip__p {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+      max-width: 500px;
+    }
+    .brand-strip__stats {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+    .brand-stat {}
+    .brand-stat__num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .brand-stat__label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero__right { display: none; }
+      .hero__left { min-height: 85vh; padding: 4rem 2rem; }
+      .hero__left::before { display: none; }
+      .brand-strip__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .brand-strip__stats { gap: 2rem; }
+    }
+
+    /* ── HERO VIDEO COVER (Celine-style) ──
+       Видео стартует на весь экран, потом
+       схлопывается вправо в hero__right
+       ───────────────────────────────── */
+    .hero-cover {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 90;
+      overflow: hidden;
+      will-change: top, left, width, height;
+    }
+    .hero-cover.morphing {
+      transition:
+        top    0.95s cubic-bezier(0.76, 0, 0.24, 1),
+        left   0.95s cubic-bezier(0.76, 0, 0.24, 1),
+        width  0.95s cubic-bezier(0.76, 0, 0.24, 1),
+        height 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .hero-cover.gone { display: none; }
+    .hero-cover video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── INTRO OVERLAY — лого + текст по центру ── */
+    .hero-cover__overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      background: rgba(21, 19, 17, 0.48);
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      text-align: center;
+      padding: 2rem;
+      pointer-events: none;
+    }
+    .hero-cover.morphing .hero-cover__overlay {
+      opacity: 0;
+    }
+    .hero-cover__logo {
+      width: clamp(72px, 12vw, 110px);
+      height: auto;
+      filter: brightness(0) invert(1);
+      animation: introFadeDown 0.9s ease both;
+    }
+    .hero-cover__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #FFFDF8;
+      line-height: 1.1;
+      animation: introFadeDown 0.9s 0.15s ease both;
+    }
+    .hero-cover__sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.7rem, 1.4vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: #C7A75D;
+      animation: introFadeDown 0.9s 0.3s ease both;
+    }
+    .hero-cover__rule {
+      width: 48px;
+      height: 1px;
+      background: #C7A75D;
+      margin: 0 auto;
+      animation: introFadeDown 0.9s 0.22s ease both;
+    }
+    @keyframes introFadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Левая колонка hero: изначально скрыта */
+    .hero__left {
+      opacity: 0;
+      transform: translateX(-18px);
+    }
+    .hero__left.revealed {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+  </style>
+</head>
+<body data-page="home">
+
+<!-- ══ HERO VIDEO COVER — стартует на весь экран, схлопывается вправо ══ -->
+<div class="hero-cover" id="heroCover">
+  <video autoplay muted playsinline preload="auto">
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+  <div class="hero-cover__overlay">
+    <img src="logo-emblem.png" alt="" class="hero-cover__logo">
+    <div class="hero-cover__rule"></div>
+    <p class="hero-cover__title">Queens Qoncept Clinic</p>
+    <p class="hero-cover__sub">Beauty &amp; Aesthetic</p>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="logo.png" alt="Queens Qoncept Clinic" class="header__logo-img" />
+    </a>
+    <nav class="header__nav">
+      <a href="index.html"        data-nav="home"        data-i18n="nav.home">Home</a>
+      <a href="services.html"     data-nav="services"    data-i18n="nav.services">Services</a>
+      <a href="specialists.html"  data-nav="specialists" data-i18n="nav.specialists">Specialists</a>
+      <a href="about.html"        data-nav="about"       data-i18n="nav.about">About</a>
+      <a href="gallery.html"      data-nav="gallery"     data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html"      data-nav="contact"     data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header__right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="sv">SV</button>
+      </div>
+      <a href="booking.html" class="btn btn-primary btn-sm" data-i18n="nav.book">Book appointment</a>
+    </div>
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html"       data-i18n="nav.home">Home</a>
+  <a href="services.html"    data-i18n="nav.services">Services</a>
+  <a href="specialists.html" data-i18n="nav.specialists">Specialists</a>
+  <a href="about.html"       data-i18n="nav.about">About</a>
+  <a href="gallery.html"     data-i18n="nav.gallery">Gallery</a>
+  <a href="contact.html"     data-i18n="nav.contact">Contact</a>
+  <a href="booking.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" data-i18n="nav.book">Book appointment</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero__left" id="heroLeft">
+    <div class="hero__label-wrap">
+      <span class="label" data-i18n="hero.label">Beauty &amp; Aesthetic Clinic</span>
+    </div>
+    <div style="height:1.5rem;"></div>
+    <h1 class="hero__title">
+      <span class="line1" data-i18n="hero.title1">Queens</span>
+      <span class="line2" data-i18n="hero.title2">Qoncept</span>
+      <span class="line3" data-i18n="hero.title3">Clinic</span>
+    </h1>
+    <div class="gold-rule hero__rule"></div>
+    <p class="hero__sub" data-i18n="hero.sub">A refined beauty and aesthetic space where expertise, comfort and elegance meet.</p>
+    <div class="hero__cta">
+      <a href="booking.html" class="btn btn-primary" data-i18n="hero.cta1">Book appointment</a>
+      <a href="services.html" class="btn btn-secondary" data-i18n="hero.cta2">View services</a>
+    </div>
+  </div>
+  <div class="hero__right" id="heroRight" style="visibility:hidden;">
+    <video
+      class="hero__img"
+      autoplay muted loop playsinline
+      style="object-fit:cover;width:100%;height:100%;display:block;"
+    >
+      <source src="intro.mp4" type="video/mp4">
+    </video>
+    <div class="hero__red-strip"></div>
+  </div>
+</section>
+
+<!-- ═══ BRAND STRIP ═══ -->
+<div class="brand-strip">
+  <div class="container">
+    <div class="brand-strip__inner">
+      <div class="brand-strip__text">
+        <span class="label" data-i18n="home.brand.label">About the clinic</span>
+        <div style="height:1rem;"></div>
+        <h2 class="title-md serif" style="margin-bottom:1rem;" data-i18n="home.brand.title">Queens Qoncept Clinic</h2>
+        <p class="brand-strip__p" data-i18n="home.brand.text">A modern beauty and aesthetic space in the heart of Stockholm, created for clients who value elegance, expertise and personal care. Three carefully selected specialists. One refined concept.</p>
+      </div>
+      <div class="brand-strip__stats">
+        <div class="brand-stat">
+          <div class="brand-stat__num" data-i18n="home.brand.rating">4.9 / 5</div>
+          <div class="brand-stat__label" data-i18n="home.brand.rat.label">Client rating</div>
+        </div>
+        <div style="width:1px;height:48px;background:var(--beige-light);"></div>
+        <div class="brand-stat">
+          <div class="brand-stat__num" data-i18n="home.brand.rev">445+</div>
+          <div class="brand-stat__label" data-i18n="home.brand.rev.label">Reviews</div>
+        </div>
+        <div style="width:1px;height:48px;background:var(--beige-light);"></div>
+        <div class="brand-stat">
+          <div class="brand-stat__num" data-i18n="home.brand.exp">7+</div>
+          <div class="brand-stat__label" data-i18n="home.brand.exp.label">Years of expertise</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES PREVIEW ═══ -->
+<section class="section section--ivory">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <span class="label label--red" data-i18n="home.services.label">What we offer</span>
+        <div style="height:0.75rem;"></div>
+        <h2 class="title-xl serif" data-i18n="home.services.title">Our Services</h2>
+        <div class="gold-rule"></div>
+      </div>
+      <a href="services.html" class="btn btn-secondary" data-i18n="home.services.link">View all services</a>
+    </div>
+    <div class="service-cards">
+      <a href="services.html#aesthetic" class="service-card">
+        <div class="service-card__num">01</div>
+        <h3 class="service-card__title" data-i18n="cat.aesthetic">Aesthetic Treatments</h3>
+        <p class="service-card__desc" data-i18n="cat.aesthetic.sub">Dermapen microneedling, Insculpt Chair</p>
+        <span class="service-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="services.html#facials" class="service-card">
+        <div class="service-card__num">02</div>
+        <h3 class="service-card__title" data-i18n="cat.facials">Facials</h3>
+        <p class="service-card__desc" data-i18n="cat.facials.sub">Deep cleansing, anti-age, multi facial</p>
+        <span class="service-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="services.html#peels" class="service-card">
+        <div class="service-card__num">03</div>
+        <h3 class="service-card__title" data-i18n="cat.peels">Peels</h3>
+        <p class="service-card__desc" data-i18n="cat.peels.sub">Retinol, AHA, Lumilight, Rejuv, Purify</p>
+        <span class="service-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="services.html#massage" class="service-card">
+        <div class="service-card__num">04</div>
+        <h3 class="service-card__title" data-i18n="cat.massage">Massage</h3>
+        <p class="service-card__desc" data-i18n="cat.massage.sub">Raindrop aromatherapy massage</p>
+        <span class="service-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="services.html#brows" class="service-card">
+        <div class="service-card__num">05</div>
+        <h3 class="service-card__title" data-i18n="cat.brows">Brows &amp; Lashes</h3>
+        <p class="service-card__desc" data-i18n="cat.brows.sub">Brow shaping, tinting, lash colour</p>
+        <span class="service-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a href="services.html#packages" class="service-card">
+        <div class="service-card__num">06</div>
+        <h3 class="service-card__title" data-i18n="cat.packages">Packages &amp; Offers</h3>
+        <p class="service-card__desc" data-i18n="cat.packages.sub">Combined treatments &amp; special prices</p>
+        <span class="service-card__arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section class="section section--white">
+  <div class="container">
+    <div class="team-carousel">
+
+      <!-- Visual: fan of 3 photos -->
+      <div class="team-carousel__visual" id="teamVisual">
+        <img class="team-carousel__img" id="teamImg0"
+          src="images/ludmila.jpg"
+          alt="Ludmila" />
+        <img class="team-carousel__img" id="teamImg1"
+          src="images/olena.jpg"
+          alt="Olena" />
+        <img class="team-carousel__img" id="teamImg2"
+          src="images/caroline.jpg"
+          alt="Caroline" />
+      </div>
+
+      <!-- Info -->
+      <div class="team-carousel__info">
+        <span class="label" data-i18n="home.team.label">The specialists</span>
+        <div class="gold-rule" style="margin:1rem 0 2rem;"></div>
+
+        <div class="team-carousel__slide" id="teamSlide">
+          <h2 class="team-carousel__name serif" id="teamName">Ludmila</h2>
+          <p class="team-carousel__role" id="teamRole">Head Cosmetologist &amp; Founder</p>
+          <p class="team-carousel__bio" id="teamBio">Over a decade of expertise in advanced aesthetic treatments. Specialises in Dermapen microneedling, PRX-T33, and bespoke facial protocols tailored to each client's skin.</p>
+          <a href="specialists.html#ludmila" class="team-carousel__link" id="teamLink">
+            View profile
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="team-carousel__controls">
+          <button class="team-carousel__arrow" id="teamPrev" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="team-carousel__arrow" id="teamNext" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4.5L11.5 9 7 13.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="team-carousel__counter"><span id="teamCurrent">1</span>&thinsp;/&thinsp;3</span>
+          <a href="specialists.html" class="team-carousel__all" data-i18n="home.team.link">View all</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var team = [
+    { name: 'Ludmila', role: 'Head Cosmetologist & Founder',
+      bio: 'Over a decade of expertise in advanced aesthetic treatments. Specialises in Dermapen microneedling, PRX-T33, and bespoke facial protocols tailored to each client\'s skin.',
+      href: 'specialists.html#ludmila' },
+    { name: 'Olena', role: 'Massage Therapist',
+      bio: 'Certified in Raindrop aromatherapy massage. Olena creates deeply restorative experiences that blend therapeutic skill with an intuitive, healing touch.',
+      href: 'specialists.html#olena' },
+    { name: 'Caroline', role: 'Cosmetologist',
+      bio: 'Certified cosmetologist with a precise, results-driven approach. Known for her meticulous brow work and restorative facials that leave skin visibly transformed.',
+      href: 'specialists.html#caroline' }
+  ];
+  var current = 0;
+  var total = team.length;
+  var imgs    = [document.getElementById('teamImg0'), document.getElementById('teamImg1'), document.getElementById('teamImg2')];
+  var nameEl  = document.getElementById('teamName');
+  var roleEl  = document.getElementById('teamRole');
+  var bioEl   = document.getElementById('teamBio');
+  var linkEl  = document.getElementById('teamLink');
+  var slide   = document.getElementById('teamSlide');
+  var counter = document.getElementById('teamCurrent');
+  var btnPrev = document.getElementById('teamPrev');
+  var btnNext = document.getElementById('teamNext');
+
+  if (!imgs[0]) return;
+
+  function setStates(activeIdx) {
+    var left  = (activeIdx - 1 + total) % total;
+    var right = (activeIdx + 1) % total;
+    imgs.forEach(function (img, i) {
+      img.dataset.state = i === activeIdx ? 'active' : i === left ? 'left' : i === right ? 'right' : 'hidden';
+    });
+  }
+
+  function goTo(idx) {
+    var next = (idx + total) % total;
+    slide.classList.add('fading');
+    setTimeout(function () {
+      current = next;
+      var m = team[current];
+      nameEl.textContent = m.name;
+      roleEl.textContent = m.role;
+      bioEl.textContent  = m.bio;
+      linkEl.href        = m.href;
+      counter.textContent = current + 1;
+      setStates(current);
+      slide.classList.remove('fading');
+    }, 260);
+  }
+
+  btnPrev.addEventListener('click', function () { goTo(current - 1); });
+  btnNext.addEventListener('click', function () { goTo(current + 1); });
+
+  setStates(0);
+})();
+</script>
+
+<!-- ═══ CLIENT TESTIMONIALS ═══ -->
+<section class="tc-section">
+  <div class="container">
+    <div class="tc-header">
+      <span class="label" data-i18n="home.review.label">Client experience</span>
+      <div style="height:0.75rem;"></div>
+      <h2 class="title-xl serif" data-i18n="home.reviews.title">What our clients say</h2>
+      <div class="gold-rule" style="margin:1.5rem auto;"></div>
+    </div>
+  </div>
+  <div class="tc-columns">
+    <div class="tc-col">
+      <div class="tc-track" style="--tc-dur:15s">
+        <div class="tc-card">
+          <p class="tc-card__text">"The atmosphere is calm, elegant and completely professional. I felt at ease from the very first moment I walked in."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">AK</div>
+            <div><div class="tc-name">Anna K.</div><div class="tc-role">Dermapen microneedling</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"Beautiful clinic and attentive specialists. My skin has never looked so radiant. I will definitely be returning."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">ML</div>
+            <div><div class="tc-name">Maria L.</div><div class="tc-role">Facial &amp; Peel</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"Outstanding results after just one PRX-T33 session. Every step was explained clearly and I felt completely comfortable."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">SR</div>
+            <div><div class="tc-name">Sofia R.</div><div class="tc-role">PRX-T33 Biorevitalisation</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-col tc-col--md">
+      <div class="tc-track" style="--tc-dur:19s">
+        <div class="tc-card">
+          <p class="tc-card__text">"The most careful brow shaping I have ever experienced. You can see the precision and care in every single detail."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">EV</div>
+            <div><div class="tc-name">Elena V.</div><div class="tc-role">Brow styling</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"The Raindrop aromatherapy massage with Olena was the most relaxing experience I have had in years. A true sanctuary."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">KM</div>
+            <div><div class="tc-name">Karin M.</div><div class="tc-role">Raindrop massage</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"After my anti-age facial, several people asked if I had been on holiday. The results speak for themselves."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">LP</div>
+            <div><div class="tc-name">Lena P.</div><div class="tc-role">Anti-age facial</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-col tc-col--lg">
+      <div class="tc-track" style="--tc-dur:17s">
+        <div class="tc-card">
+          <p class="tc-card__text">"From reception to treatment room, every detail is considered. The deep cleanse facial left my skin glowing for weeks."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">SJ</div>
+            <div><div class="tc-name">Sara J.</div><div class="tc-role">Deep cleanse facial</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"The Dermapen and peel package was exactly what my skin needed. Visible, lasting results that exceeded my expectations."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">PH</div>
+            <div><div class="tc-name">Petra H.</div><div class="tc-role">Dermapen &amp; Peel package</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"Caroline gave me the most beautiful lash colour. The attention to detail is remarkable and the result looks completely natural."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">IN</div>
+            <div><div class="tc-name">Ida N.</div><div class="tc-role">Lash colour</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section section--white">
+  <div class="container">
+    <div class="cta-strip">
+      <span class="label" data-i18n="home.cta.label">Ready to visit?</span>
+      <div style="height:1.5rem;"></div>
+      <h2 class="title-xl serif" style="margin-bottom:1rem;" data-i18n="home.cta.title">Book your appointment</h2>
+      <p style="font-size:0.88rem;color:var(--text-muted);max-width:400px;margin:0 auto 2.5rem;line-height:1.75;" data-i18n="home.cta.sub">Choose your service, select a specialist and find a time that suits you.</p>
+      <a href="booking.html" class="btn btn-primary btn-lg" data-i18n="home.cta.btn">Book now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <img src="logo.png" alt="Queens Qoncept Clinic" class="footer__logo-img" />
+        <p class="footer__tagline" data-i18n="footer.tagline">Beauty, aesthetics and care in one concept.</p>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col1">Services</p>
+        <ul class="footer__links">
+          <li><a href="services.html#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a></li>
+          <li><a href="services.html#prx">PRX-T33</a></li>
+          <li><a href="services.html#facials" data-i18n="cat.facials">Facials</a></li>
+          <li><a href="services.html#peels" data-i18n="cat.peels">Peels</a></li>
+          <li><a href="services.html#brows" data-i18n="cat.brows">Brows &amp; Lashes</a></li>
+          <li><a href="services.html#massage" data-i18n="cat.massage">Massage</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col2">Navigate</p>
+        <ul class="footer__links">
+          <li><a href="specialists.html" data-i18n="nav.specialists">Specialists</a></li>
+          <li><a href="booking.html" data-i18n="nav.book">Book appointment</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-i18n="footer.copy">© 2026 Queens Qoncept Clinic. All rights reserved.</span>
+      <div class="footer__carpet">
+        <div class="footer__carpet-line"></div>
+        <span class="footer__carpet-text" data-i18n="footer.carpet">Signature red carpet</span>
+        <div class="footer__carpet-line"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+  /* ─── HERO VIDEO COVER (Celine-style) ───
+     Видео стартует на весь экран, затем
+     схлопывается вправо в позицию hero__right
+     ─────────────────────────────────────── */
+  (function () {
+    const cover     = document.getElementById('heroCover');
+    const heroLeft  = document.getElementById('heroLeft');
+    const heroRight = document.getElementById('heroRight');
+    const HOLD_MS   = 2800;  // Видео на весь экран 2.8с
+    const MORPH_MS  = 950;   // Анимация схлопывания
+
+    // Повторный визит — сразу показываем hero без анимации
+    if (sessionStorage.getItem('qqc_intro_seen')) {
+      cover.classList.add('gone');
+      heroLeft.classList.add('revealed');
+      heroRight.style.visibility = 'visible';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    function morph() {
+      // Вычисляем точную позицию правой колонки
+      const rect = heroRight.getBoundingClientRect();
+
+      // Запускаем морф: cover переходит из 100vw/vh в позицию hero__right
+      cover.classList.add('morphing');
+      cover.style.top    = rect.top    + 'px';
+      cover.style.left   = rect.left   + 'px';
+      cover.style.width  = rect.width  + 'px';
+      cover.style.height = rect.height + 'px';
+
+      // Параллельно: левая колонка появляется
+      heroLeft.classList.add('revealed');
+      document.body.style.overflow = '';
+
+      // После окончания морфа: cover → скрываем, hero__right видим
+      setTimeout(function () {
+        cover.classList.add('gone');
+        heroRight.style.visibility = 'visible';
+        sessionStorage.setItem('qqc_intro_seen', '1');
+      }, MORPH_MS);
+    }
+
+    setTimeout(morph, HOLD_MS);
+  })();
+</script>
+</body>
+</html>

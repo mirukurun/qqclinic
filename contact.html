@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Queens Qoncept Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body data-page="contact" class="page-enter">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header header--opaque" id="header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="logo.png" alt="Queens Qoncept Clinic" class="header__logo-img" />
+    </a>
+    <nav class="header__nav">
+      <a href="index.html"        data-nav="home"        data-i18n="nav.home">Home</a>
+      <a href="services.html"     data-nav="services"    data-i18n="nav.services">Services</a>
+      <a href="specialists.html"  data-nav="specialists" data-i18n="nav.specialists">Specialists</a>
+      <a href="about.html"        data-nav="about"       data-i18n="nav.about">About</a>
+      <a href="gallery.html"      data-nav="gallery"     data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html"      data-nav="contact"     data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header__right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="sv">SV</button>
+      </div>
+      <a href="booking.html" class="btn btn-primary btn-sm" data-i18n="nav.book">Book appointment</a>
+    </div>
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html"       data-i18n="nav.home">Home</a>
+  <a href="services.html"    data-i18n="nav.services">Services</a>
+  <a href="specialists.html" data-i18n="nav.specialists">Specialists</a>
+  <a href="about.html"       data-i18n="nav.about">About</a>
+  <a href="gallery.html"     data-i18n="nav.gallery">Gallery</a>
+  <a href="contact.html"     data-i18n="nav.contact">Contact</a>
+  <a href="booking.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" data-i18n="nav.book">Book appointment</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero">
+  <div class="page-hero__inner">
+    <span class="label" data-i18n="contact.label">Find us</span>
+    <div style="height:0.75rem;"></div>
+    <h1 class="title-xl serif" data-i18n="contact.title">Visit Queens Qoncept Clinic</h1>
+    <div class="gold-rule"></div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="section section--sm section--white">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-block">
+          <p class="contact-key" data-i18n="contact.address">Address</p>
+          <p class="contact-val">
+            Birger Jarlsgatan 37<br>
+            111 45 Stockholm<br>
+            Sweden
+          </p>
+        </div>
+        <div class="contact-block">
+          <p class="contact-key" data-i18n="contact.phone">Phone</p>
+          <p class="contact-val">
+            <a href="tel:+46700000000">+46 70 000 00 00</a>
+          </p>
+        </div>
+        <div class="contact-block">
+          <p class="contact-key" data-i18n="contact.email">Email</p>
+          <p class="contact-val">
+            <a href="mailto:hello@queensqoncept.se">hello@queensqoncept.se</a>
+          </p>
+        </div>
+        <div class="contact-block">
+          <p class="contact-key" data-i18n="contact.hours">Opening hours</p>
+          <div class="hours-grid">
+            <span class="hours-day" data-i18n="hours.weekday">Mon – Fri</span>
+            <span class="hours-time">09:00 – 20:00</span>
+            <span class="hours-day" data-i18n="hours.sat">Saturday</span>
+            <span class="hours-time">10:00 – 18:00</span>
+            <span class="hours-day" data-i18n="hours.sun">Sunday</span>
+            <span class="hours-time" data-i18n="hours.closed">Closed</span>
+          </div>
+        </div>
+        <div class="contact-block">
+          <p class="contact-key" data-i18n="contact.social">Social</p>
+          <div class="contact-social">
+            <a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram @queens.qoncept</a>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <a href="booking.html" class="btn btn-primary" data-i18n="contact.book">Book appointment</a>
+        </div>
+      </div>
+
+      <div class="contact-map" style="padding:0;overflow:hidden;display:block;position:relative;">
+        <div id="clinic-map" style="width:100%;height:100%;"></div>
+        <a
+          href="https://maps.google.com/?q=Birger+Jarlsgatan+37,+Stockholm"
+          target="_blank"
+          rel="noopener"
+          class="map-gmaps-link"
+        >Open in Google Maps ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLIENT TESTIMONIALS ═══ -->
+<section class="tc-section">
+  <div class="container">
+    <div class="tc-header">
+      <span class="label" data-i18n="home.review.label">Client experience</span>
+      <div style="height:0.75rem;"></div>
+      <h2 class="title-xl serif" data-i18n="home.reviews.title">What our clients say</h2>
+      <div class="gold-rule" style="margin:1.5rem auto;"></div>
+    </div>
+  </div>
+  <div class="tc-columns">
+    <div class="tc-col">
+      <div class="tc-track" style="--tc-dur:15s">
+        <div class="tc-card">
+          <p class="tc-card__text">"The atmosphere is calm, elegant and completely professional. I felt at ease from the very first moment I walked in."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">AK</div>
+            <div><div class="tc-name">Anna K.</div><div class="tc-role">Dermapen microneedling</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"Beautiful clinic and attentive specialists. My skin has never looked so radiant. I will definitely be returning."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">ML</div>
+            <div><div class="tc-name">Maria L.</div><div class="tc-role">Facial &amp; Peel</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"Outstanding results after just one PRX-T33 session. Every step was explained clearly and I felt completely comfortable."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">SR</div>
+            <div><div class="tc-name">Sofia R.</div><div class="tc-role">PRX-T33 Biorevitalisation</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-col tc-col--md">
+      <div class="tc-track" style="--tc-dur:19s">
+        <div class="tc-card">
+          <p class="tc-card__text">"The most careful brow shaping I have ever experienced. You can see the precision and care in every single detail."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">EV</div>
+            <div><div class="tc-name">Elena V.</div><div class="tc-role">Brow styling</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"The Raindrop aromatherapy massage with Olena was the most relaxing experience I have had in years. A true sanctuary."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">KM</div>
+            <div><div class="tc-name">Karin M.</div><div class="tc-role">Raindrop massage</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"After my anti-age facial, several people asked if I had been on holiday. The results speak for themselves."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">LP</div>
+            <div><div class="tc-name">Lena P.</div><div class="tc-role">Anti-age facial</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-col tc-col--lg">
+      <div class="tc-track" style="--tc-dur:17s">
+        <div class="tc-card">
+          <p class="tc-card__text">"From reception to treatment room, every detail is considered. The deep cleanse facial left my skin glowing for weeks."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">SJ</div>
+            <div><div class="tc-name">Sara J.</div><div class="tc-role">Deep cleanse facial</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"The Dermapen and peel package was exactly what my skin needed. Visible, lasting results that exceeded my expectations."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">PH</div>
+            <div><div class="tc-name">Petra H.</div><div class="tc-role">Dermapen &amp; Peel package</div></div>
+          </div>
+        </div>
+        <div class="tc-card">
+          <p class="tc-card__text">"Caroline gave me the most beautiful lash colour. The attention to detail is remarkable and the result looks completely natural."</p>
+          <div class="tc-card__footer">
+            <div class="tc-avatar">IN</div>
+            <div><div class="tc-name">Ida N.</div><div class="tc-role">Lash colour</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <img src="logo.png" alt="Queens Qoncept Clinic" class="footer__logo-img" />
+        <p class="footer__tagline" data-i18n="footer.tagline">Beauty, aesthetics and care in one concept.</p>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col1">Services</p>
+        <ul class="footer__links">
+          <li><a href="services.html#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a></li>
+          <li><a href="services.html#facials" data-i18n="cat.facials">Facials</a></li>
+          <li><a href="services.html#peels" data-i18n="cat.peels">Peels</a></li>
+          <li><a href="services.html#massage" data-i18n="cat.massage">Massage</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col2">Navigate</p>
+        <ul class="footer__links">
+          <li><a href="specialists.html" data-i18n="nav.specialists">Specialists</a></li>
+          <li><a href="booking.html" data-i18n="nav.book">Book appointment</a></li>
+          <li><a href="about.html" data-i18n="nav.about">About</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-i18n="footer.copy">© 2026 Queens Qoncept Clinic. All rights reserved.</span>
+      <div class="footer__carpet">
+        <div class="footer__carpet-line"></div>
+        <span class="footer__carpet-text" data-i18n="footer.carpet">Signature red carpet</span>
+        <div class="footer__carpet-line"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var LAT = 59.3343, LNG = 18.0729;
+  var mapEl = document.getElementById('clinic-map');
+  if (!mapEl) return;
+
+  var map = L.map('clinic-map', {
+    center: [LAT, LNG],
+    zoom: 16,
+    zoomControl: true,
+    scrollWheelZoom: false,
+    attributionControl: false
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+
+  var icon = L.divIcon({
+    className: '',
+    html: '<div class="map-marker__dot"></div>',
+    iconSize: [20, 20],
+    iconAnchor: [10, 10]
+  });
+  L.marker([LAT, LNG], { icon: icon }).addTo(map);
+
+  /* ensure correct size after layout paint */
+  setTimeout(function () { map.invalidateSize(); }, 200);
+})();
+</script>
+</body>
+</html>

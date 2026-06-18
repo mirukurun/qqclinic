@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Queens Qoncept Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .carpet-section {
+      background: var(--beige-light);
+      padding: var(--section-v) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .carpet-section__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .carpet-img {
+      height: 460px;
+      background: linear-gradient(140deg, #C8A09A 0%, #A0544F 55%, #6B0A0A 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+      position: relative;
+    }
+    .carpet-img::after {
+      content: '';
+      position: absolute;
+      top: 2rem; right: 2rem;
+      width: 1px; height: 48px;
+      background: rgba(255,255,255,0.35);
+    }
+    .carpet-label {
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .carpet-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--graphite);
+      margin-bottom: 1.5rem;
+    }
+    .carpet-rule {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1.5rem;
+    }
+    .carpet-rule-bar { width: 40px; height: 2px; background: var(--red); }
+    .carpet-rule-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .value-card { padding: 2rem; border: 1px solid var(--beige-light); background: var(--white); }
+    .value-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--graphite); margin-bottom: 1rem; }
+    .value-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--graphite); margin-bottom: 0.6rem; }
+    .value-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+    @media (max-width: 900px) {
+      .carpet-section__inner { grid-template-columns: 1fr; gap: 3rem; }
+      .carpet-img { height: 280px; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="about" class="page-enter">
+
+<!-- ═══ HEADER ═══ -->
+<header class="header header--opaque" id="header">
+  <div class="header__inner">
+    <a href="index.html" class="header__logo">
+      <img src="logo.png" alt="Queens Qoncept Clinic" class="header__logo-img" />
+    </a>
+    <nav class="header__nav">
+      <a href="index.html"        data-nav="home"        data-i18n="nav.home">Home</a>
+      <a href="services.html"     data-nav="services"    data-i18n="nav.services">Services</a>
+      <a href="specialists.html"  data-nav="specialists" data-i18n="nav.specialists">Specialists</a>
+      <a href="about.html"        data-nav="about"       data-i18n="nav.about">About</a>
+      <a href="gallery.html"      data-nav="gallery"     data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html"      data-nav="contact"     data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="header__right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="sv">SV</button>
+      </div>
+      <a href="booking.html" class="btn btn-primary btn-sm" data-i18n="nav.book">Book appointment</a>
+    </div>
+    <button class="header__burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="index.html"       data-i18n="nav.home">Home</a>
+  <a href="services.html"    data-i18n="nav.services">Services</a>
+  <a href="specialists.html" data-i18n="nav.specialists">Specialists</a>
+  <a href="about.html"       data-i18n="nav.about">About</a>
+  <a href="gallery.html"     data-i18n="nav.gallery">Gallery</a>
+  <a href="contact.html"     data-i18n="nav.contact">Contact</a>
+  <a href="booking.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" data-i18n="nav.book">Book appointment</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<div class="page-hero page-hero--has-img">
+  <div class="page-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=1400&q=80&fit=crop&auto=format');"></div>
+  <div class="page-hero__inner">
+    <span class="label" data-i18n="about.label">Our story</span>
+    <div style="height:0.75rem;"></div>
+    <h1 class="title-xl serif" style="color:#fff;" data-i18n="about.title">About Queens Qoncept Clinic</h1>
+    <div class="gold-rule" style="background:rgba(199,167,93,0.6);"></div>
+  </div>
+</div>
+
+<!-- ═══ STORY ═══ -->
+<section class="section section--white">
+  <div class="container">
+    <div class="about-intro">
+      <div class="about-img">
+        <div class="about-img__frame">
+          <img
+            src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80&fit=crop&auto=format"
+            alt="Queens Qoncept Clinic interior"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          />
+          <div class="about-img__placeholder" style="display:none;background:linear-gradient(160deg,var(--beige-light),var(--beige-sand));height:100%;"></div>
+        </div>
+        <div class="about-img__gold"></div>
+      </div>
+      <div>
+        <span class="label" data-i18n="about.label">Our story</span>
+        <div style="height:0.75rem;"></div>
+        <h2 class="title-lg serif" style="margin-bottom:1.5rem;" data-i18n="about.title">About Queens Qoncept Clinic</h2>
+        <div class="gold-rule"></div>
+        <p style="font-size:0.9rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.25rem;" data-i18n="about.p1">Queens Qoncept Clinic is a modern beauty and aesthetic space in Stockholm, created for clients who value elegance, expertise and personal care.</p>
+        <p style="font-size:0.9rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.25rem;" data-i18n="about.p2">The concept was built around one idea: that every visit should feel both effective and refined. Our carefully selected specialists combine technical excellence with a warm, personal approach.</p>
+        <p style="font-size:0.9rem;line-height:1.85;color:var(--text-muted);" data-i18n="about.p3">Every detail — from the white-walled treatment rooms to the signature red carpet at the entrance — is designed to make you feel that you are in exactly the right place.</p>
+        <div style="height:2.5rem;"></div>
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-num">4.9</div>
+            <div class="stat-label" data-i18n="home.brand.rat.label">Client rating</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">445+</div>
+            <div class="stat-label" data-i18n="home.brand.rev.label">Reviews</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7+</div>
+            <div class="stat-label" data-i18n="home.brand.exp.label">Years of expertise</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RED CARPET ═══ -->
+<section class="carpet-section">
+  <div class="container">
+    <div class="carpet-section__inner">
+      <div class="carpet-img">
+        <span class="carpet-label">Clinic interior — signature detail</span>
+      </div>
+      <div>
+        <span class="label" data-i18n="about.carpet.label">The signature detail</span>
+        <div style="height:0.75rem;"></div>
+        <h2 class="title-lg serif" style="margin-bottom:0;" data-i18n="about.carpet.title">The red carpet</h2>
+        <div class="carpet-rule">
+          <div class="carpet-rule-bar"></div>
+          <span class="carpet-rule-label">Queens Qoncept</span>
+        </div>
+        <p class="carpet-quote" data-i18n="about.carpet.q">"From the very first step inside, you feel it."</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.8;margin-bottom:1rem;" data-i18n="about.carpet.p1">The bright red carpet inside the clinic became an unexpected and memorable part of the Queens Qoncept experience. Bold against the warm white walls, it signals something distinctive.</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.8;" data-i18n="about.carpet.p2">On the website, this detail is reflected through refined red accents: booking buttons, active states, selected highlights. The red is never decorative — it always means something.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUES ═══ -->
+<section class="section section--white">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <span class="label" data-i18n="about.vals.label">Our approach</span>
+      <div style="height:0.75rem;"></div>
+      <h2 class="title-lg serif" data-i18n="about.vals.title">Three principles</h2>
+      <div class="gold-rule" style="margin:1.5rem auto;"></div>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3 class="value-title" data-i18n="about.v1.title">Expertise</h3>
+        <p class="value-text" data-i18n="about.v1.text">Every specialist is selected for skill, precision and a genuine commitment to results.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h3 class="value-title" data-i18n="about.v2.title">Comfort</h3>
+        <p class="value-text" data-i18n="about.v2.text">From the first call to the last treatment step, the experience is calm, clear and personal.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h3 class="value-title" data-i18n="about.v3.title">Refinement</h3>
+        <p class="value-text" data-i18n="about.v3.text">Beauty at its best is quiet. No excess. No performance. Just work done well.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="section section--beige">
+  <div class="container">
+    <div class="cta-strip" style="padding:3rem 0;">
+      <h2 class="title-lg serif" style="margin-bottom:1rem;" data-i18n="home.cta.title">Book your appointment</h2>
+      <a href="booking.html" class="btn btn-primary btn-lg" data-i18n="nav.book">Book appointment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <img src="logo.png" alt="Queens Qoncept Clinic" class="footer__logo-img" />
+        <p class="footer__tagline" data-i18n="footer.tagline">Beauty, aesthetics and care in one concept.</p>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col1">Services</p>
+        <ul class="footer__links">
+          <li><a href="services.html#aesthetic" data-i18n="cat.aesthetic">Aesthetic Treatments</a></li>
+          <li><a href="services.html#facials" data-i18n="cat.facials">Facials</a></li>
+          <li><a href="services.html#peels" data-i18n="cat.peels">Peels</a></li>
+          <li><a href="services.html#massage" data-i18n="cat.massage">Massage</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title" data-i18n="footer.col2">Navigate</p>
+        <ul class="footer__links">
+          <li><a href="specialists.html" data-i18n="nav.specialists">Specialists</a></li>
+          <li><a href="booking.html" data-i18n="nav.book">Book appointment</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+          <li><a href="https://www.instagram.com/queens.qoncept/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span data-i18n="footer.copy">© 2026 Queens Qoncept Clinic. All rights reserved.</span>
+      <div class="footer__carpet">
+        <div class="footer__carpet-line"></div>
+        <span class="footer__carpet-text" data-i18n="footer.carpet">Signature red carpet</span>
+        <div class="footer__carpet-line"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
