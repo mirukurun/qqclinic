@@ -136,6 +136,23 @@
       <!-- STEP 4 -->
       <div class="booking-step" id="step4">
         <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;letter-spacing:0.04em;" data-i18n="step4.hint">Review and confirm your booking</p>
+        <div class="booking-contact">
+          <p class="booking-contact__label" data-i18n="step4.contact">Your details</p>
+          <div class="booking-contact__fields">
+            <div style="grid-column:1/-1;">
+              <input class="booking-input" type="text" id="clientName" placeholder="Full name" autocomplete="name" />
+              <p class="booking-field-error" id="errName">Please enter your name</p>
+            </div>
+            <div>
+              <input class="booking-input" type="tel" id="clientPhone" placeholder="Phone number" autocomplete="tel" />
+              <p class="booking-field-error" id="errPhone">Please enter your phone number</p>
+            </div>
+            <div>
+              <input class="booking-input" type="email" id="clientEmail" placeholder="Email address" autocomplete="email" />
+              <p class="booking-field-error" id="errEmail">Please enter a valid email</p>
+            </div>
+          </div>
+        </div>
         <div class="booking-summary">
           <div class="summary-row">
             <span class="summary-label" data-i18n="summary.service">Service</span>
@@ -173,7 +190,7 @@
     <h2 class="title-md serif" data-i18n="modal.title">Your appointment is set.</h2>
     <div class="gold-rule"></div>
     <div id="modalDetails" style="font-size:0.85rem;color:var(--text-muted);line-height:1.85;margin-bottom:1.5rem;"></div>
-    <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2rem;" data-i18n="modal.note">A confirmation will be sent to your email. We look forward to welcoming you.</p>
+    <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2rem;" id="modalNote" data-i18n="modal.note">A confirmation will be sent to your email. We look forward to welcoming you.</p>
     <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal('confirmModal')" data-i18n="modal.close">Done</button>
   </div>
 </div>
@@ -235,20 +252,76 @@
     { key:'Insculpt Chair',       sub:'Electromagnetic muscle stimulation' },
     { key:'Milia Removal',        sub:'Professional extraction' }
   ];
+  const TREATMENTS = {
+    'Packages & Offers': [
+      { name:'Microneedling + PRX-T33',               desc:'Return visit combination treatment',       duration:60, price:'3 898' },
+      { name:'Microneedling + PRX-T33 + Cryotherapy', desc:'New clients — special price',              duration:60, price:'1 498' },
+      { name:'PRX-T33 Trial',                         desc:'First-time offer',                         duration:35, price:'1 499' },
+      { name:'Insculpt Chair Trial',                  desc:'Introductory session',                     duration:45, price:'495' },
+      { name:'Retinol Peeling 4-Pack',                desc:'Series of four retinol peel sessions',     duration:30, price:'4 796' },
+    ],
+    'Aesthetic Treatments': [
+      { name:'Dermapen Face',                         desc:'Microneedling facial rejuvenation',        duration:45, price:'2 598' },
+      { name:'Dermapen Face & Neck',                  desc:'Extended microneedling protocol',          duration:60, price:'3 198' },
+      { name:'Dermapen Face, Neck & Décolletage',desc:'Full upper body microneedling',            duration:90, price:'3 798' },
+      { name:'Dermapen Décolletage',             desc:'Targeted décolletage treatment',      duration:40, price:'2 498' },
+      { name:'Insculpt Chair Treatment',              desc:'Electromagnetic muscle stimulation',       duration:40, price:'1 495' },
+    ],
+    'PRX-T33': [
+      { name:'PRX-T33 Face',                          desc:'Biorevitalisation without needles',        duration:30, price:'2 198' },
+      { name:'PRX-T33 Face & Neck',                   desc:'Extended biorevitalisation',               duration:45, price:'2 989' },
+      { name:'PRX-T33 Face, Neck & Décolletage', desc:'Full upper body biorevitalisation',        duration:60, price:'3 598' },
+    ],
+    'Facials': [
+      { name:'Multi Facial Treatment',                desc:'Personalised multi-step facial protocol',  duration:60, price:'2 995' },
+      { name:'Deep Cleansing Facial',                 desc:'Exuviance / Neostrata formulas',           duration:60, price:'1 548' },
+      { name:'Classic Facial',                        desc:'70-minute classic facial treatment',       duration:70, price:'1 748' },
+      { name:'Classic Facial Extended',               desc:'90-minute indulgent facial treatment',     duration:90, price:'1 798' },
+      { name:'Anti-Age Gold Mask',                    desc:'With lash & brow tinting',                 duration:60, price:'1 798' },
+      { name:'Anti-Age Gold Mask Extended',           desc:'90-minute anti-ageing protocol',           duration:90, price:'1 898' },
+      { name:'Milia Removal',                         desc:'Professional extraction of milia',         duration:30, price:'598' },
+    ],
+    'Peels': [
+      { name:'Retinol Peeling',                       desc:'Cell renewal peel with retinol',           duration:30, price:'1 498' },
+      { name:'Lumilight Peel',                        desc:'Includes homecare kit',                    duration:40, price:'1 998' },
+      { name:'Rejuv Peel',                            desc:'Includes homecare kit',                    duration:40, price:'1 998' },
+      { name:'Purify Peel',                           desc:'Includes homecare kit',                    duration:40, price:'1 998' },
+      { name:'AHA Peel with Gold Mask',               desc:'Exfoliating peel with luxury mask',        duration:30, price:'799' },
+    ],
+    'Brows & Lashes': [
+      { name:'Brow Tinting + Shaping + Plucking',     desc:'Complete brow styling',                    duration:15, price:'500' },
+      { name:'Anti-Age Gold Mask + Lash & Brow Colour',desc:'Combined anti-age & brow treatment',      duration:60, price:'1 798' },
+    ],
+    'Massage': [
+      { name:'Raindrop Massage',                      desc:'Aromatherapy massage with essential oils', duration:60, price:'1 498' },
+    ],
+    'Insculpt Chair': [
+      { name:'Insculpt Chair Treatment',              desc:'Electromagnetic muscle stimulation',       duration:40, price:'1 495' },
+    ],
+    'Milia Removal': [
+      { name:'Milia Removal',                         desc:'Professional extraction of milia',         duration:30, price:'598' },
+    ],
+  };
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const TIMES = ['09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00'];
   const UNAVAIL = [1,4,7,11];
 
+  function hesc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
   /* ─── STATE ─── */
   let mode = 'service';
-  let data = { service:null, specialistId:null, specialist:null, date:null, time:null };
+  let step1Phase = 'category';
+  let step2Phase = 'category';
+  let data = { service:null, treatment:null, specialistId:null, specialist:null, date:null, time:null };
   let step = 1;
   let calY, calM;
 
   /* ─── MODE ─── */
   function setMode(m) {
     mode = m;
-    data = { service:null, specialistId:null, specialist:null, date:null, time:null };
+    data = { service:null, treatment:null, specialistId:null, specialist:null, date:null, time:null };
+    step1Phase = 'category';
+    step2Phase = 'category';
     document.getElementById('tabSvc').classList.toggle('active', m === 'service');
     document.getElementById('tabSp').classList.toggle('active', m === 'specialist');
     document.getElementById('lbl1').dataset.i18n = m === 'service' ? 'step.service' : 'step.specialist';
@@ -265,7 +338,7 @@
     if (n === 1) renderStep1();
     if (n === 2) renderStep2();
     if (n === 3) renderCal();
-    if (n === 4) renderSummary();
+    if (n === 4) { renderSummary(); clearContactErrors(); }
   }
   function updateStepper() {
     for (let i=1;i<=4;i++) {
@@ -279,40 +352,76 @@
     }
   }
 
+  /* ─── TREATMENT LIST ─── */
+  function renderTreatmentList(container, categoryKey, selectedTreatment, backFn, pickFn) {
+    const list = TREATMENTS[categoryKey] || [];
+    let html = `<button class="treatment-back" onclick="${backFn}()">&#8592; ${hesc(categoryKey)}</button>
+    <div class="treatment-list">`;
+    list.forEach((tr, i) => {
+      const sel = selectedTreatment && selectedTreatment.name === tr.name;
+      html += `<div class="treatment-item${sel?' selected':''}" onclick="${pickFn}(${i})">
+        <div class="treatment-item__left">
+          <div class="treatment-item__name">${hesc(tr.name)}</div>
+          <div class="treatment-item__desc">${hesc(tr.desc)}</div>
+        </div>
+        <div class="treatment-item__meta">
+          <span class="treatment-item__duration">${tr.duration} min</span>
+          <span class="treatment-item__price">${tr.price} kr</span>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+    container.style.gridTemplateColumns = '1fr';
+    container.innerHTML = html;
+  }
+
   /* ─── RENDER STEP 1 ─── */
   function renderStep1() {
     const c = document.getElementById('step1Content');
     const h = document.getElementById('hint1');
     if (mode === 'service') {
       h.dataset.i18n = 'step1.hint.svc'; h.textContent = T[currentLang]['step1.hint.svc'];
-      c.style.gridTemplateColumns = '';
-      c.innerHTML = ALL_SERVICES.map(s =>
-        `<div class="option-card${data.service===s.key?' selected':''}" onclick="pick1Svc(this,'${s.key}')">
-          <div class="option-card__title">${s.key}</div>
-          <div class="option-card__sub">${s.sub}</div>
-        </div>`).join('');
+      if (step1Phase === 'category') {
+        c.style.gridTemplateColumns = '';
+        c.innerHTML = ALL_SERVICES.map(s =>
+          `<div class="option-card${data.service===s.key?' selected':''}" onclick="pick1Cat('${hesc(s.key)}')">
+            <div class="option-card__title">${hesc(s.key)}</div>
+            <div class="option-card__sub">${hesc(s.sub)}</div>
+          </div>`).join('');
+      } else {
+        renderTreatmentList(c, data.service, data.treatment, 'backToCat1', 'pick1Treatment');
+      }
     } else {
       h.dataset.i18n = 'step1.hint.sp'; h.textContent = T[currentLang]['step1.hint.sp'];
       c.style.gridTemplateColumns = '1fr 1fr';
       c.innerHTML = SPECIALISTS.map(sp =>
         `<div class="option-card${data.specialistId===sp.id?' selected':''}" onclick="pick1Sp(this,${sp.id})">
-          <div class="option-card__title">${sp.name}</div>
-          <div class="option-card__sub">${sp.role}</div>
+          <div class="option-card__title">${hesc(sp.name)}</div>
+          <div class="option-card__sub">${hesc(sp.role)}</div>
         </div>`).join('');
     }
   }
-  function pick1Svc(el, key) {
-    document.querySelectorAll('#step1Content .option-card').forEach(o=>o.classList.remove('selected'));
-    el.classList.add('selected');
+  function pick1Cat(key) {
     data.service = key;
-    data.specialist = null; data.specialistId = null;
+    data.treatment = null;
+    step1Phase = 'treatment';
+    renderStep1();
+  }
+  function pick1Treatment(i) {
+    data.treatment = (TREATMENTS[data.service] || [])[i];
+    renderStep1();
+  }
+  function backToCat1() {
+    step1Phase = 'category';
+    data.treatment = null;
+    renderStep1();
   }
   function pick1Sp(el, id) {
     document.querySelectorAll('#step1Content .option-card').forEach(o=>o.classList.remove('selected'));
     el.classList.add('selected');
     const sp = SPECIALISTS.find(s=>s.id===id);
     data.specialistId = id; data.specialist = sp.name + ' — ' + sp.role;
-    data.service = null;
+    data.service = null; data.treatment = null;
   }
 
   /* ─── RENDER STEP 2 ─── */
@@ -330,19 +439,23 @@
       c.style.gridTemplateColumns = '1fr 1fr';
       c.innerHTML = avail.map(sp =>
         `<div class="option-card${data.specialistId===sp.id?' selected':''}" onclick="pick2Sp(this,${sp.id})">
-          <div class="option-card__title">${sp.name}</div>
-          <div class="option-card__sub">${sp.role}</div>
+          <div class="option-card__title">${hesc(sp.name)}</div>
+          <div class="option-card__sub">${hesc(sp.role)}</div>
         </div>`).join('');
     } else {
       h.dataset.i18n = 'step2.hint.sp'; h.textContent = T[currentLang]['step2.hint.sp'];
       const sp = SPECIALISTS.find(s=>s.id===data.specialistId);
       const svcs = sp ? ALL_SERVICES.filter(s=>sp.services.includes(s.key)) : [];
-      c.style.gridTemplateColumns = '';
-      c.innerHTML = svcs.map(s =>
-        `<div class="option-card${data.service===s.key?' selected':''}" onclick="pick2Svc(this,'${s.key}')">
-          <div class="option-card__title">${s.key}</div>
-          <div class="option-card__sub">${s.sub}</div>
-        </div>`).join('');
+      if (step2Phase === 'category') {
+        c.style.gridTemplateColumns = '';
+        c.innerHTML = svcs.map(s =>
+          `<div class="option-card${data.service===s.key?' selected':''}" onclick="pick2Cat('${hesc(s.key)}')">
+            <div class="option-card__title">${hesc(s.key)}</div>
+            <div class="option-card__sub">${hesc(s.sub)}</div>
+          </div>`).join('');
+      } else {
+        renderTreatmentList(c, data.service, data.treatment, 'backToCat2', 'pick2Treatment');
+      }
     }
   }
   function pick2Sp(el, id) {
@@ -351,10 +464,20 @@
     const sp = SPECIALISTS.find(s=>s.id===id);
     data.specialistId = id; data.specialist = sp.name + ' — ' + sp.role;
   }
-  function pick2Svc(el, key) {
-    document.querySelectorAll('#step2Content .option-card').forEach(o=>o.classList.remove('selected'));
-    el.classList.add('selected');
+  function pick2Cat(key) {
     data.service = key;
+    data.treatment = null;
+    step2Phase = 'treatment';
+    renderStep2();
+  }
+  function pick2Treatment(i) {
+    data.treatment = (TREATMENTS[data.service] || [])[i];
+    renderStep2();
+  }
+  function backToCat2() {
+    step2Phase = 'category';
+    data.treatment = null;
+    renderStep2();
   }
 
   /* ─── CALENDAR ─── */
@@ -399,33 +522,100 @@
 
   /* ─── SUMMARY ─── */
   function renderSummary() {
-    const f = v => v||`<span style="color:var(--beige-sand);">—</span>`;
+    const f = v => v||`<span style="color:var(--beige-sand);">&#8212;</span>`;
     const ds = data.date ? data.date.split('-').reverse().join('.') : null;
-    document.getElementById('sumSvc').innerHTML  = f(data.service);
-    document.getElementById('sumSp').innerHTML   = f(data.specialist);
+    const svcDisplay = data.treatment
+      ? `${hesc(data.treatment.name)}<span class="summary-sub">${data.treatment.duration} min &middot; ${data.treatment.price} kr</span>`
+      : f(data.service ? hesc(data.service) : null);
+    document.getElementById('sumSvc').innerHTML  = svcDisplay;
+    document.getElementById('sumSp').innerHTML   = f(data.specialist ? hesc(data.specialist) : null);
     document.getElementById('sumDate').innerHTML = f(ds);
     document.getElementById('sumTime').innerHTML = f(data.time);
   }
 
+  function clearContactErrors() {
+    ['clientName','clientPhone','clientEmail'].forEach(id => document.getElementById(id).classList.remove('error'));
+    ['errName','errPhone','errEmail'].forEach(id => document.getElementById(id).classList.remove('visible'));
+  }
+
   function confirm() {
+    const svcName = data.treatment ? data.treatment.name : data.service;
+    const svcMeta = data.treatment ? ` (${data.treatment.duration} min &middot; ${data.treatment.price} kr)` : '';
+    const clientName  = (document.getElementById('clientName').value  || '').trim();
+    const clientPhone = (document.getElementById('clientPhone').value || '').trim();
+    const clientEmail = (document.getElementById('clientEmail').value || '').trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clientEmail);
+
+    let valid = true;
+    function setErr(inputId, errId, show) {
+      document.getElementById(inputId).classList.toggle('error', show);
+      document.getElementById(errId).classList.toggle('visible', show);
+      if (show) valid = false;
+    }
+    setErr('clientName',  'errName',  !clientName);
+    setErr('clientPhone', 'errPhone', !clientPhone);
+    setErr('clientEmail', 'errEmail', !emailOk);
+    if (!valid) return;
+
     const lines = [
-      data.service    ? `<strong>${T[currentLang]['summary.service']}:</strong> ${data.service}` : '',
-      data.specialist ? `<strong>${T[currentLang]['summary.specialist']}:</strong> ${data.specialist}` : '',
+      svcName         ? `<strong>${T[currentLang]['summary.service']}:</strong> ${hesc(svcName)}${svcMeta}` : '',
+      data.specialist ? `<strong>${T[currentLang]['summary.specialist']}:</strong> ${hesc(data.specialist)}` : '',
       data.date       ? `<strong>${T[currentLang]['summary.date']}:</strong> ${data.date.split('-').reverse().join('.')}` : '',
       data.time       ? `<strong>${T[currentLang]['summary.time']}:</strong> ${data.time}` : '',
+      clientName      ? `<strong>${T[currentLang]['step4.name'] || 'Name'}:</strong> ${hesc(clientName)}` : '',
+      clientPhone     ? `<strong>${T[currentLang]['step4.phone'] || 'Phone'}:</strong> ${hesc(clientPhone)}` : '',
     ].filter(Boolean);
     document.getElementById('modalDetails').innerHTML = lines.join('<br>');
+
     openModal('confirmModal');
-    data = { service:null, specialistId:null, specialist:null, date:null, time:null };
+    data = { service:null, treatment:null, specialistId:null, specialist:null, date:null, time:null };
+    step1Phase = 'category';
+    step2Phase = 'category';
     setMode(mode);
+
+    // Update modal note after setMode (which calls applyLanguage and would overwrite it)
+    const noteEl = document.getElementById('modalNote');
+    if (noteEl) {
+      noteEl.textContent = clientEmail
+        ? (currentLang === 'sv'
+            ? `En bekräftelse skickas till ${clientEmail}. Vi ser fram emot att välkomna dig.`
+            : `A confirmation will be sent to ${clientEmail}. We look forward to welcoming you.`)
+        : (currentLang === 'sv'
+            ? 'Vi ser fram emot att välkomna dig.'
+            : 'We look forward to welcoming you.');
+    }
   }
 
   // Init
   renderStep1();
 
-  // If arriving from specialists page with ?specialist=Name — pre-select and jump to step 2
+  // Pre-select from URL params: ?specialist=Name or ?treatment=Name
   (function initFromURL() {
-    const spParam = new URLSearchParams(location.search).get('specialist');
+    const params = new URLSearchParams(location.search);
+
+    // ?treatment=Name — pre-select treatment, jump to specialist step
+    const treatParam = params.get('treatment');
+    if (treatParam) {
+      for (const [cat, treatments] of Object.entries(TREATMENTS)) {
+        const tr = treatments.find(t => t.name.toLowerCase() === treatParam.toLowerCase());
+        if (tr) {
+          mode = 'service';
+          data.service = cat;
+          data.treatment = tr;
+          step1Phase = 'treatment';
+          document.getElementById('tabSvc').classList.add('active');
+          document.getElementById('tabSp').classList.remove('active');
+          document.getElementById('lbl1').dataset.i18n = 'step.service';
+          document.getElementById('lbl2').dataset.i18n = 'step.specialist';
+          if (typeof applyLanguage === 'function') applyLanguage(currentLang);
+          goStep(2);
+          return;
+        }
+      }
+    }
+
+    // ?specialist=Name — pre-select specialist, jump to service step
+    const spParam = params.get('specialist');
     if (!spParam) return;
     const match = SPECIALISTS.find(s => s.name.toLowerCase() === spParam.toLowerCase());
     if (!match) return;

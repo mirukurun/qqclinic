@@ -365,6 +365,13 @@
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
   cats.forEach(c => observer.observe(c));
+
+  // Wire each Book button to the specific treatment
+  document.querySelectorAll('.service-row').forEach(row => {
+    const name = row.querySelector('.service-row__name')?.textContent;
+    const btn  = row.querySelector('a[href^="booking.html"]');
+    if (name && btn) btn.href = 'booking.html?treatment=' + encodeURIComponent(name);
+  });
 </script>
 </body>
 </html>

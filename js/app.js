@@ -114,6 +114,10 @@ const T = {
     'summary.specialist': 'Specialist',
     'summary.date':       'Date',
     'summary.time':       'Time',
+    'step4.contact':  'Your details',
+    'step4.name':     'Full name',
+    'step4.phone':    'Phone number',
+    'step4.email':    'Email address',
     'modal.label':    'Booking confirmed',
     'modal.title':    'Your appointment is set.',
     'modal.note':     'A confirmation will be sent to your email. We look forward to welcoming you.',
@@ -275,6 +279,10 @@ const T = {
     'summary.specialist': 'Specialist',
     'summary.date':       'Datum',
     'summary.time':       'Tid',
+    'step4.contact':  'Dina uppgifter',
+    'step4.name':     'För- och efternamn',
+    'step4.phone':    'Telefonnummer',
+    'step4.email':    'E-postadress',
     'modal.label':    'Bokning bekräftad',
     'modal.title':    'Din tid är bokad.',
     'modal.note':     'En bekräftelse skickas till din e-post. Vi ser fram emot att välkomna dig.',
@@ -416,20 +424,85 @@ function initHeader() {
   onScroll();
 }
 
+/* ─── НИЖНЯЯ ПАНЕЛЬ (book + бургер) ─── */
+function initMobileBookBar() {
+  const isBooking = document.body.dataset.page === 'booking';
+  const bar = document.createElement('div');
+  bar.className = 'mobile-book-bar';
+
+  const bookHtml = isBooking ? '' :
+    '<a href="booking.html" class="btn btn-primary btn-sm" data-i18n="nav.book">Book appointment</a>';
+
+  bar.innerHTML =
+    bookHtml +
+    '<button class="mobile-book-bar__burger" aria-label="Menu">' +
+      '<span></span><span></span><span></span>' +
+    '</button>';
+
+  document.body.appendChild(bar);
+
+  bar.querySelector('.mobile-book-bar__burger').addEventListener('click', function() {
+    const h = document.getElementById('burger');
+    if (h) h.click();
+  });
+}
+
 /* ─── MOBILE NAV ─── */
 function initMobileNav() {
   const burger = document.getElementById('burger');
   const mobileNav = document.getElementById('mobileNav');
   if (!burger || !mobileNav) return;
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'nav-backdrop';
+  document.body.appendChild(backdrop);
+
   let open = false;
-  burger.addEventListener('click', () => {
-    open = !open;
-    mobileNav.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  });
-  mobileNav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => { open = false; mobileNav.classList.remove('open'); });
-  });
+
+  function openNav() {
+    open = true;
+    mobileNav.classList.add('open');
+    burger.classList.add('open');
+    const bbBurger = document.querySelector('.mobile-book-bar__burger');
+    if (bbBurger) bbBurger.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    open = false;
+    mobileNav.classList.remove('open');
+    burger.classList.remove('open');
+    const bbBurger = document.querySelector('.mobile-book-bar__burger');
+    if (bbBurger) bbBurger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  burger.addEventListener('click', () => open ? closeNav() : openNav());
+  backdrop.addEventListener('click', closeNav);
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+}
+
+/* ─── TEAM CAROUSEL SWIPE ─── */
+function initTeamSwipe() {
+  const visual = document.getElementById('teamVisual');
+  if (!visual) return;
+  let startX = 0, startY = 0;
+  visual.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  visual.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      const btn = dx < 0 ? document.getElementById('teamNext') : document.getElementById('teamPrev');
+      if (btn) btn.click();
+    }
+  }, { passive: true });
 }
 
 /* ─── ACTIVE NAV LINK ─── */
@@ -447,6 +520,44 @@ function initLangToggle() {
   });
 }
 
+/* ─── SERVICES SIDEBAR — активный таб при прокрутке ─── */
+function initServicesSidebar() {
+  const links = document.querySelectorAll('.sidebar-link');
+  if (!links.length) return;
+
+  const nav = document.querySelector('.services-sidebar__nav');
+  const sections = Array.from(links)
+    .map(l => document.getElementById(l.getAttribute('href').slice(1)))
+    .filter(Boolean);
+
+  function setActive(id) {
+    links.forEach(l => {
+      const isActive = l.getAttribute('href') === '#' + id;
+      l.classList.toggle('active', isActive);
+      if (isActive && nav && window.innerWidth <= 1100) {
+        const target = l.offsetLeft - nav.offsetWidth / 2 + l.offsetWidth / 2;
+        nav.scrollTo({ left: target, behavior: 'smooth' });
+      }
+    });
+  }
+
+  function update() {
+    const viewH = window.innerHeight;
+    let maxVisible = -1;
+    let activeId = sections[0].id;
+    sections.forEach(s => {
+      const r = s.getBoundingClientRect();
+      const visible = Math.max(0, Math.min(r.bottom, viewH) - Math.max(r.top, 0));
+      if (visible > maxVisible) { maxVisible = visible; activeId = s.id; }
+    });
+    setActive(activeId);
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+  setTimeout(update, 150); // hash-навигация
+}
+
 /* ─── MODAL ─── */
 function openModal(id) {
   const m = document.getElementById(id);
@@ -460,11 +571,14 @@ function closeModal(id) {
 /* ─── INIT ─── */
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
+  initMobileBookBar();   // создаёт нижнюю панель до initMobileNav
   initMobileNav();
   initActiveNav();
   initLangToggle();
   initReviewStack();
   initTestimonialsColumns();
+  initTeamSwipe();
+  initServicesSidebar();
   applyLanguage(currentLang);
 
   // Close modal on overlay click

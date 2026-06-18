@@ -69,6 +69,10 @@
       .carpet-img { height: 280px; }
       .values-grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 768px) {
+      .about-img { display: none; }
+      .about-intro-heading { display: none; }
+    }
   </style>
 </head>
 <body data-page="about" class="page-enter">
@@ -136,9 +140,11 @@
         <div class="about-img__gold"></div>
       </div>
       <div>
-        <span class="label" data-i18n="about.label">Our story</span>
-        <div style="height:0.75rem;"></div>
-        <h2 class="title-lg serif" style="margin-bottom:1.5rem;" data-i18n="about.title">About Queens Qoncept Clinic</h2>
+        <div class="about-intro-heading">
+          <span class="label" data-i18n="about.label">Our story</span>
+          <div style="height:0.75rem;"></div>
+          <h2 class="title-lg serif" style="margin-bottom:1.5rem;" data-i18n="about.title">About Queens Qoncept Clinic</h2>
+        </div>
         <div class="gold-rule"></div>
         <p style="font-size:0.9rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.25rem;" data-i18n="about.p1">Queens Qoncept Clinic is a modern beauty and aesthetic space in Stockholm, created for clients who value elegance, expertise and personal care.</p>
         <p style="font-size:0.9rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.25rem;" data-i18n="about.p2">The concept was built around one idea: that every visit should feel both effective and refined. Our carefully selected specialists combine technical excellence with a warm, personal approach.</p>
