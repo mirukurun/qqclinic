@@ -56,6 +56,56 @@
   </div>
 </div>
 
+<!-- ═══ FILTER BAR ═══ -->
+<div class="services-filter-bar" id="filterBar">
+  <div class="container">
+    <div class="filter-row" id="filterRow">
+
+      <div class="filter-group">
+        <span class="filter-label">Specialist</span>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="specialist" data-value="">All</button>
+          <button class="filter-pill" data-filter="specialist" data-value="Ludmila">Ludmila</button>
+          <button class="filter-pill" data-filter="specialist" data-value="Caroline">Caroline</button>
+          <button class="filter-pill" data-filter="specialist" data-value="Olena">Olena</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filterCat">Category</label>
+        <select class="filter-select" id="filterCat">
+          <option value="">All categories</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Max price</span>
+        <div class="filter-price-group">
+          <input type="range" class="filter-range" id="filterPrice" min="0" max="5000" step="50" value="5000">
+          <span class="filter-price-val" id="filterPriceVal">Any price</span>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filterDur">Duration</label>
+        <select class="filter-select" id="filterDur">
+          <option value="">Any duration</option>
+          <option value="15">Up to 15 min</option>
+          <option value="30">Up to 30 min</option>
+          <option value="45">Up to 45 min</option>
+          <option value="60">Up to 60 min</option>
+          <option value="90">Up to 90 min</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="filter-meta" id="filterMeta">
+      <span class="filter-count" id="filterCount"></span>
+      <button class="filter-clear" id="filterClear">Clear all ×</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ SERVICES LIST ═══ -->
 <section class="section section--white">
   <div class="container">
@@ -68,6 +118,7 @@
 
       <!-- CONTENT -->
       <div id="servicesContent">
+        <div class="filter-no-results" id="filterNoResults">No treatments match your filters.</div>
       </div><!-- /content -->
     </div><!-- /services-layout -->
   </div>
@@ -246,6 +297,7 @@
   ];
 
   function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function parsePrice(s) { return parseInt(String(s).replace(/\s/g, ''), 10) || 0; }
 
   /* ── Build sidebar ── */
   const nav = document.getElementById('sidebarNav');
@@ -271,7 +323,7 @@
 
     cat.treatments.forEach(tr => {
       const byTags = tr.by.map(sp => `<span class="service-row__by">${esc(sp)}</span>`).join('');
-      html += `<div class="service-row">
+      html += `<div class="service-row" data-price="${parsePrice(tr.price)}" data-dur="${tr.duration}" data-spec="${tr.by.join(',')}" data-cat="${cat.id}">
         <div>
           <div class="service-row__name">${esc(tr.name)}</div>
           <div class="service-row__desc">${esc(tr.desc)}</div>
@@ -291,7 +343,8 @@
   const allLinks = document.querySelectorAll('.sidebar-link');
   function updateSidebarActive() {
     const sections = document.querySelectorAll('.service-category');
-    const offset = 120;
+    const filterBarEl = document.getElementById('filterBar');
+    const offset = 72 + (filterBarEl ? filterBarEl.offsetHeight : 0) + 16;
     let current = sections[0]?.id || '';
     sections.forEach(s => {
       if (s.getBoundingClientRect().top <= offset) current = s.id;
@@ -310,6 +363,123 @@
 
   /* ── Re-apply i18n after dynamic content ── */
   if (typeof applyLanguage === 'function') applyLanguage(typeof currentLang !== 'undefined' ? currentLang : 'en');
+
+  /* ── Filter setup ── */
+  (function () {
+    /* Derive max price from data */
+    let DATA_MAX = 0;
+    SERVICE_CATS.forEach(cat => cat.treatments.forEach(tr => {
+      const p = parsePrice(tr.price);
+      if (p > DATA_MAX) DATA_MAX = p;
+    }));
+    DATA_MAX = Math.ceil(DATA_MAX / 100) * 100;
+
+    /* Populate category select */
+    const catSel = document.getElementById('filterCat');
+    SERVICE_CATS.forEach(cat => {
+      const o = document.createElement('option');
+      o.value = cat.id;
+      o.textContent = cat.title;
+      catSel.appendChild(o);
+    });
+
+    /* Configure price slider */
+    const slider = document.getElementById('filterPrice');
+    const priceVal = document.getElementById('filterPriceVal');
+    slider.max = DATA_MAX;
+    slider.value = DATA_MAX;
+
+    function updateSliderFill() {
+      const pct = ((slider.value - slider.min) / (slider.max - slider.min) * 100).toFixed(1) + '%';
+      slider.style.setProperty('--pct', pct);
+    }
+    updateSliderFill();
+
+    /* Set CSS var so sticky sidebar / scroll-margin know filter bar height */
+    const filterBar = document.getElementById('filterBar');
+    function syncFilterHeight() {
+      document.documentElement.style.setProperty('--filter-h', filterBar.offsetHeight + 'px');
+    }
+    syncFilterHeight();
+    window.addEventListener('resize', syncFilterHeight);
+
+    /* Filter state */
+    const F = { specialist: '', category: '', maxPrice: DATA_MAX, maxDur: 0 };
+
+    function applyFilters() {
+      const active = F.specialist || F.category || F.maxPrice < DATA_MAX || F.maxDur > 0;
+      let count = 0;
+
+      document.querySelectorAll('.service-row').forEach(row => {
+        const ok = (!F.specialist || row.dataset.spec.split(',').includes(F.specialist))
+                && (!F.category   || row.dataset.cat === F.category)
+                && (parseInt(row.dataset.price) <= F.maxPrice)
+                && (!F.maxDur     || parseInt(row.dataset.dur) <= F.maxDur);
+        row.classList.toggle('f-hide', !ok);
+        if (ok) count++;
+      });
+
+      document.querySelectorAll('.service-category').forEach(sec => {
+        const vis = sec.querySelectorAll('.service-row:not(.f-hide)').length;
+        const total = sec.querySelectorAll('.service-row').length;
+        sec.classList.toggle('f-empty', vis === 0);
+        const countEl = sec.querySelector('.service-category__count');
+        if (countEl) {
+          countEl.textContent = active
+            ? `${vis} / ${total} treatment${total !== 1 ? 's' : ''}`
+            : `${total} treatment${total !== 1 ? 's' : ''}`;
+        }
+      });
+
+      const noRes = document.getElementById('filterNoResults');
+      if (noRes) noRes.classList.toggle('visible', !!(active && count === 0));
+
+      const meta = document.getElementById('filterMeta');
+      meta.classList.toggle('active', !!active);
+      if (active) document.getElementById('filterCount').textContent =
+        `${count} treatment${count !== 1 ? 's' : ''} found`;
+
+      syncFilterHeight();
+    }
+
+    /* Specialist pills */
+    document.querySelectorAll('[data-filter="specialist"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter="specialist"]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        F.specialist = btn.dataset.value;
+        applyFilters();
+      });
+    });
+
+    /* Category */
+    catSel.addEventListener('change', () => { F.category = catSel.value; applyFilters(); });
+
+    /* Price */
+    slider.addEventListener('input', () => {
+      F.maxPrice = parseInt(slider.value);
+      priceVal.textContent = F.maxPrice >= DATA_MAX
+        ? 'Any price'
+        : 'Up to ' + F.maxPrice.toLocaleString('sv-SE') + ' kr';
+      updateSliderFill();
+      applyFilters();
+    });
+
+    /* Duration */
+    const durSel = document.getElementById('filterDur');
+    durSel.addEventListener('change', () => { F.maxDur = parseInt(durSel.value) || 0; applyFilters(); });
+
+    /* Clear */
+    document.getElementById('filterClear').addEventListener('click', () => {
+      F.specialist = ''; F.category = ''; F.maxPrice = DATA_MAX; F.maxDur = 0;
+      document.querySelectorAll('[data-filter="specialist"]').forEach(b =>
+        b.classList.toggle('active', !b.dataset.value));
+      catSel.value = '';
+      slider.value = DATA_MAX; priceVal.textContent = 'Any price'; updateSliderFill();
+      durSel.value = '';
+      applyFilters();
+    });
+  })();
 
 </script>
 </body>
