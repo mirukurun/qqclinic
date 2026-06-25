@@ -367,11 +367,56 @@
   }, { rootMargin: '-20% 0px -70% 0px' });
   cats.forEach(c => observer.observe(c));
 
-  // Wire each Book button to the specific treatment
+  // Specialist per treatment
+  const SPECIALIST_BY = {
+    'Microneedling + PRX-T33':               'Ludmila',
+    'Microneedling + PRX-T33 + Cryotherapy': 'Ludmila',
+    'PRX-T33 Trial':                          'Ludmila',
+    'Insculpt Chair Trial':                   'Ludmila',
+    'Retinol Peeling 4-Pack':                 'Ludmila',
+    'Dermapen Face':                          'Ludmila',
+    'Dermapen Face & Neck':                   'Ludmila',
+    'Dermapen Face, Neck & Décolletage':      'Ludmila',
+    'Dermapen Décolletage':                   'Ludmila',
+    'Insculpt Chair Treatment':               'Ludmila',
+    'PRX-T33 Face':                           'Ludmila',
+    'PRX-T33 Face & Neck':                    'Ludmila',
+    'PRX-T33 Face, Neck & Décolletage':       'Ludmila',
+    'Multi Facial Treatment':                 'Ludmila',
+    'Deep Cleansing Facial':                  'Ludmila',
+    'Classic Facial':                         'Caroline',
+    'Classic Facial Extended':                'Caroline',
+    'Anti-Age Gold Mask':                     'Caroline',
+    'Anti-Age Gold Mask Extended':            'Caroline',
+    'Milia Removal':                          'Caroline',
+    'Retinol Peeling':                        'Caroline',
+    'Lumilight Peel':                         'Ludmila',
+    'Rejuv Peel':                             'Ludmila',
+    'Purify Peel':                            'Ludmila',
+    'AHA Peel with Gold Mask':                'Caroline',
+    'Brow Tinting + Shaping + Plucking':      'Caroline',
+    'Anti-Age Gold Mask + Lash & Brow Colour':'Caroline',
+    'Raindrop Massage':                        'Olena',
+  };
+
   document.querySelectorAll('.service-row').forEach(row => {
-    const name = row.querySelector('.service-row__name')?.textContent;
-    const btn  = row.querySelector('a[href^="booking.html"]');
-    if (name && btn) btn.href = 'booking.html?treatment=' + encodeURIComponent(name);
+    const nameEl = row.querySelector('.service-row__name');
+    const descEl = row.querySelector('.service-row__desc');
+    const btn    = row.querySelector('a[href^="booking.html"]');
+    if (!nameEl) return;
+    const name = nameEl.textContent.trim();
+
+    // Wire Book button to specific treatment
+    if (btn) btn.href = 'booking.html?treatment=' + encodeURIComponent(name);
+
+    // Add specialist tag
+    const sp = SPECIALIST_BY[name];
+    if (sp && descEl) {
+      const tag = document.createElement('div');
+      tag.className = 'service-row__by';
+      tag.textContent = sp;
+      descEl.after(tag);
+    }
   });
 </script>
 </body>
