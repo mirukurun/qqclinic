@@ -788,11 +788,16 @@ h1, h2, h3, .h1, .h2, .h3 {
   color: var(--text-muted);
   margin-top: 0.2rem;
 }
+.service-row__specialists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
 .service-row__by {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  margin-top: 0.35rem;
   font-size: 0.65rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
