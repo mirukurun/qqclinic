@@ -79,10 +79,11 @@
       </div>
 
       <div class="filter-group">
-        <span class="filter-label">Max price</span>
-        <div class="filter-price-group">
-          <input type="range" class="filter-range" id="filterPrice" min="0" max="5000" step="50" value="5000">
-          <span class="filter-price-val" id="filterPriceVal">Any price</span>
+        <span class="filter-label">Price, kr</span>
+        <div class="filter-price-inputs">
+          <input type="number" class="filter-price-input" id="filterPriceMin" min="0" placeholder="From" aria-label="Min price">
+          <span class="filter-price-sep">—</span>
+          <input type="number" class="filter-price-input" id="filterPriceMax" min="0" placeholder="To" aria-label="Max price">
         </div>
       </div>
 
@@ -366,14 +367,6 @@
 
   /* ── Filter setup ── */
   (function () {
-    /* Derive max price from data */
-    let DATA_MAX = 0;
-    SERVICE_CATS.forEach(cat => cat.treatments.forEach(tr => {
-      const p = parsePrice(tr.price);
-      if (p > DATA_MAX) DATA_MAX = p;
-    }));
-    DATA_MAX = Math.ceil(DATA_MAX / 100) * 100;
-
     /* Populate category select */
     const catSel = document.getElementById('filterCat');
     SERVICE_CATS.forEach(cat => {
@@ -382,18 +375,6 @@
       o.textContent = cat.title;
       catSel.appendChild(o);
     });
-
-    /* Configure price slider */
-    const slider = document.getElementById('filterPrice');
-    const priceVal = document.getElementById('filterPriceVal');
-    slider.max = DATA_MAX;
-    slider.value = DATA_MAX;
-
-    function updateSliderFill() {
-      const pct = ((slider.value - slider.min) / (slider.max - slider.min) * 100).toFixed(1) + '%';
-      slider.style.setProperty('--pct', pct);
-    }
-    updateSliderFill();
 
     /* Set CSS var so sticky sidebar / scroll-margin know filter bar height */
     const filterBar = document.getElementById('filterBar');
@@ -404,16 +385,25 @@
     window.addEventListener('resize', syncFilterHeight);
 
     /* Filter state */
-    const F = { specialist: '', category: '', maxPrice: DATA_MAX, maxDur: 0 };
+    const F = { specialist: '', category: '', minPrice: 0, maxPrice: 0, maxDur: 0 };
+
+    const priceMin = document.getElementById('filterPriceMin');
+    const priceMax = document.getElementById('filterPriceMax');
+
+    function priceActive() {
+      return (F.minPrice > 0) || (F.maxPrice > 0);
+    }
 
     function applyFilters() {
-      const active = F.specialist || F.category || F.maxPrice < DATA_MAX || F.maxDur > 0;
+      const active = F.specialist || F.category || priceActive() || F.maxDur > 0;
       let count = 0;
 
       document.querySelectorAll('.service-row').forEach(row => {
+        const price = parseInt(row.dataset.price) || 0;
         const ok = (!F.specialist || row.dataset.spec.split(',').includes(F.specialist))
                 && (!F.category   || row.dataset.cat === F.category)
-                && (parseInt(row.dataset.price) <= F.maxPrice)
+                && (!F.minPrice   || price >= F.minPrice)
+                && (!F.maxPrice   || price <= F.maxPrice)
                 && (!F.maxDur     || parseInt(row.dataset.dur) <= F.maxDur);
         row.classList.toggle('f-hide', !ok);
         if (ok) count++;
@@ -455,15 +445,9 @@
     /* Category */
     catSel.addEventListener('change', () => { F.category = catSel.value; applyFilters(); });
 
-    /* Price */
-    slider.addEventListener('input', () => {
-      F.maxPrice = parseInt(slider.value);
-      priceVal.textContent = F.maxPrice >= DATA_MAX
-        ? 'Any price'
-        : 'Up to ' + F.maxPrice.toLocaleString('sv-SE') + ' kr';
-      updateSliderFill();
-      applyFilters();
-    });
+    /* Price inputs */
+    priceMin.addEventListener('input', () => { F.minPrice = parseInt(priceMin.value) || 0; applyFilters(); });
+    priceMax.addEventListener('input', () => { F.maxPrice = parseInt(priceMax.value) || 0; applyFilters(); });
 
     /* Duration */
     const durSel = document.getElementById('filterDur');
@@ -471,11 +455,11 @@
 
     /* Clear */
     document.getElementById('filterClear').addEventListener('click', () => {
-      F.specialist = ''; F.category = ''; F.maxPrice = DATA_MAX; F.maxDur = 0;
+      F.specialist = ''; F.category = ''; F.minPrice = 0; F.maxPrice = 0; F.maxDur = 0;
       document.querySelectorAll('[data-filter="specialist"]').forEach(b =>
         b.classList.toggle('active', !b.dataset.value));
       catSel.value = '';
-      slider.value = DATA_MAX; priceVal.textContent = 'Any price'; updateSliderFill();
+      priceMin.value = ''; priceMax.value = '';
       durSel.value = '';
       applyFilters();
     });

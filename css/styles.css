@@ -2354,9 +2354,10 @@ h1, h2, h3, .h1, .h2, .h3 {
 .services-filter-bar {
   position: sticky;
   top: var(--header-h);
-  z-index: 60;
+  z-index: 190;
   background: var(--white);
   border-bottom: 1px solid var(--beige-light);
+  box-shadow: 0 2px 12px rgba(43,40,37,0.06);
 }
 
 .services-filter-bar .container {
@@ -2428,46 +2429,36 @@ h1, h2, h3, .h1, .h2, .h3 {
 
 .filter-select:hover { border-color: var(--graphite); }
 
-.filter-price-group {
+.filter-price-inputs {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.filter-range {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 160px;
-  height: 2px;
-  background: linear-gradient(to right, var(--graphite) 0%, var(--graphite) var(--pct, 100%), var(--beige-sand) var(--pct, 100%), var(--beige-sand) 100%);
-  outline: none;
-  cursor: pointer;
+.filter-price-input {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  width: 80px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--beige-sand);
+  background: var(--white);
+  color: var(--graphite);
+  transition: border-color var(--ease);
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
-.filter-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--graphite);
-  cursor: pointer;
-  border: 2px solid var(--white);
-  box-shadow: 0 0 0 1px var(--graphite);
-}
+.filter-price-input::-webkit-outer-spin-button,
+.filter-price-input::-webkit-inner-spin-button { -webkit-appearance: none; }
 
-.filter-range::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--graphite);
-  cursor: pointer;
-  border: none;
-}
+.filter-price-input:hover { border-color: var(--graphite); }
+.filter-price-input:focus { outline: none; border-color: var(--graphite); }
+.filter-price-input::placeholder { color: var(--beige-sand); }
 
-.filter-price-val {
-  font-size: 0.67rem;
-  color: var(--text-sub);
-  letter-spacing: 0.03em;
+.filter-price-sep {
+  font-size: 0.7rem;
+  color: var(--beige-sand);
+  flex-shrink: 0;
 }
 
 .filter-meta {
@@ -2515,12 +2506,12 @@ h1, h2, h3, .h1, .h2, .h3 {
 
 @media (max-width: 768px) {
   .filter-row { gap: 1.2rem; }
-  .filter-range { width: 130px; }
   .filter-select { min-width: 130px; }
+  .filter-price-input { width: 68px; }
 }
 
 @media (max-width: 480px) {
   .services-filter-bar .container { padding-top: 0.85rem; padding-bottom: 0.75rem; }
   .filter-row { gap: 0.9rem; }
-  .filter-range { width: 110px; }
+  .filter-price-input { width: 60px; }
 }
