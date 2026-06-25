@@ -725,7 +725,11 @@ h1, h2, h3, .h1, .h2, .h3 {
 .services-sidebar {
   position: sticky;
   top: calc(var(--header-h) + 2rem);
+  max-height: calc(100vh - var(--header-h) - 4rem);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+.services-sidebar::-webkit-scrollbar { display: none; }
 .services-sidebar__nav {
   display: flex;
   flex-direction: column;

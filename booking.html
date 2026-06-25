@@ -158,7 +158,7 @@
     { id:2, name:'Olena',    role:'Massage & Wellness Therapist', bokadirekt:'touch-of-balance-134261',
       services:['Massage','Pressotherapy','RF Treatment','Hair Removal','Body Treatments'] },
     { id:3, name:'Caroline', role:'Cosmetologist', bokadirekt:'caroline-khan-stockholm-38355',
-      services:['Microneedling','Facials','Peels','Advanced Skincare','Brows & Lashes','Lash Extensions','Lashlift','Manicure & Pedicure','Body Treatments','Hair Removal'] }
+      services:['Microneedling','Facials','Peels','Advanced Skincare','Brows & Lashes','Lashlift','Body Treatments','Hair Removal'] }
   ];
   const ALL_SERVICES = [
     { key:'Packages & Offers',   sub:'Special offers and treatment bundles' },
@@ -169,13 +169,11 @@
     { key:'Peels',               sub:'Retinol, Lumilight, Rejuv, Purify, Mela, TCA' },
     { key:'Advanced Skincare',   sub:'Glow, Polynukleotider, Diatermi, TCA' },
     { key:'Brows & Lashes',      sub:'Brow lift, tinting, microblading' },
-    { key:'Lash Extensions',     sub:'Classic & volume lash sets' },
     { key:'Lashlift',            sub:'Lash lift with optional tinting' },
     { key:'Massage',             sub:'Raindrop, deep tissue, hot stone and more' },
     { key:'Pressotherapy',       sub:'Lymphatic drainage pressotherapy' },
     { key:'RF Treatment',        sub:'Radiofrequency skin tightening' },
     { key:'Hair Removal',        sub:'Sugaring for face and body' },
-    { key:'Manicure & Pedicure', sub:'Express, classic and gel options' },
     { key:'Body Treatments',     sub:'Anti-cellulite, Madero, classic massage' },
     { key:'Men\'s Treatments',   sub:'Back treatments and facials for men' },
   ];
@@ -248,15 +246,6 @@
       { name:'Microblading Touch-Up',                 desc:'Follow-up microblading session',           duration:90,  price:null,    by:['Caroline'] },
       { name:'Threading',                             desc:'Facial hair removal by threading',         duration:25,  price:'395',   by:['Caroline'] },
     ],
-    'Lash Extensions': [
-      { name:'Classic Lash Extensions',               desc:'Single natural-look lash set',             duration:120, price:'1 495', by:['Caroline'] },
-      { name:'Volume Lash Extensions',                desc:'Full volume lash set',                     duration:135, price:'1 695', by:['Caroline'] },
-      { name:'Classic Lash Infill 60 min',            desc:'Classic lash infill',                      duration:60,  price:'750',   by:['Caroline'] },
-      { name:'Classic Lash Infill 75 min',            desc:'Classic lash infill extended',             duration:75,  price:'795',   by:['Caroline'] },
-      { name:'Classic Lash Infill 90 min',            desc:'Classic lash infill full session',         duration:90,  price:'795',   by:['Caroline'] },
-      { name:'Volume Lash Infill 75 min',             desc:'Volume lash infill',                       duration:75,  price:'895',   by:['Caroline'] },
-      { name:'Volume Lash Infill 90 min',             desc:'Volume lash infill full session',          duration:90,  price:'950',   by:['Caroline'] },
-    ],
     'Lashlift': [
       { name:'Lashlift',                              desc:'Lash lift for a natural curl effect',      duration:45,  price:'750',   by:['Caroline'] },
       { name:'Lashlift + Lash Tint',                  desc:'Lash lift with lash tinting',              duration:50,  price:'900',   by:['Caroline'] },
@@ -304,15 +293,6 @@
       { name:'Sugaring — Lower Back',                 desc:'Lower back sugaring',                      duration:15,  price:'280',   by:['Olena'] },
       { name:'Sugaring — Stomach',                    desc:'Stomach area sugaring',                    duration:15,  price:'280',   by:['Olena'] },
       { name:'Waxing — Lip or Chin',                  desc:'Facial waxing',                            duration:15,  price:'250',   by:['Caroline'] },
-    ],
-    'Manicure & Pedicure': [
-      { name:'Express Manicure',                      desc:'Quick nail care and shaping',              duration:50,  price:'695',   by:['Caroline'] },
-      { name:'Gel Manicure',                          desc:'Manicure with gel polish',                 duration:90,  price:'795',   by:['Caroline'] },
-      { name:'Express Pedicure',                      desc:'Quick foot care treatment',                duration:45,  price:'750',   by:['Caroline'] },
-      { name:'Foot Care',                             desc:'Classic wellness foot treatment',          duration:60,  price:'695',   by:['Caroline'] },
-      { name:'Pedicure with Gel Polish',              desc:'Pedicure with gel colour',                 duration:85,  price:'950',   by:['Caroline'] },
-      { name:'Pedicure with Polish',                  desc:'Pedicure with regular polish',             duration:75,  price:'850',   by:['Caroline'] },
-      { name:'Paraffin Bath',                         desc:'Nourishing paraffin hand or foot treatment', duration:15, price:'150',  by:['Caroline'] },
     ],
     'Body Treatments': [
       { name:'Anti-Cellulite Massage 30 min',         desc:'Targeted anti-cellulite body massage',    duration:30,  price:'795',   by:['Caroline'] },

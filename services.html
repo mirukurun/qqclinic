@@ -185,15 +185,6 @@
       { name:'Microblading',                          desc:'Semi-permanent eyebrow tattoo',       duration:195,price:'4 500', by:['Caroline'] },
       { name:'Threading',                             desc:'Facial hair removal by threading',    duration:25, price:'395',   by:['Caroline'] },
     ]},
-    { id:'lash-ext',   title:'Lash Extensions',     treatments:[
-      { name:'Classic Lash Extensions',               desc:'Single natural-look lash set',        duration:120,price:'1 495', by:['Caroline'] },
-      { name:'Volume Lash Extensions',                desc:'Full volume lash set',                duration:135,price:'1 695', by:['Caroline'] },
-      { name:'Classic Lash Infill 60 min',            desc:'Classic lash infill',                 duration:60, price:'750',   by:['Caroline'] },
-      { name:'Classic Lash Infill 75 min',            desc:'Classic lash infill extended',        duration:75, price:'795',   by:['Caroline'] },
-      { name:'Classic Lash Infill 90 min',            desc:'Classic lash infill full session',    duration:90, price:'795',   by:['Caroline'] },
-      { name:'Volume Lash Infill 75 min',             desc:'Volume lash infill',                  duration:75, price:'895',   by:['Caroline'] },
-      { name:'Volume Lash Infill 90 min',             desc:'Volume lash infill full session',     duration:90, price:'950',   by:['Caroline'] },
-    ]},
     { id:'lashlift',   title:'Lashlift',             treatments:[
       { name:'Lashlift',                              desc:'Lash lift for a natural curl effect',  duration:45,price:'750',   by:['Caroline'] },
       { name:'Lashlift + Lash Tint',                  desc:'Lash lift with lash tinting',         duration:50, price:'900',   by:['Caroline'] },
@@ -241,15 +232,6 @@
       { name:'Sugaring — Lower Back',                 desc:'Lower back sugaring',                 duration:15, price:'280',   by:['Olena'] },
       { name:'Sugaring — Stomach',                    desc:'Stomach area sugaring',               duration:15, price:'280',   by:['Olena'] },
       { name:'Waxing — Lip or Chin',                  desc:'Facial waxing',                       duration:15, price:'250',   by:['Caroline'] },
-    ]},
-    { id:'mani-pedi',  title:'Manicure & Pedicure',  treatments:[
-      { name:'Express Manicure',                      desc:'Quick nail care and shaping',         duration:50, price:'695',   by:['Caroline'] },
-      { name:'Gel Manicure',                          desc:'Manicure with gel polish',            duration:90, price:'795',   by:['Caroline'] },
-      { name:'Express Pedicure',                      desc:'Quick foot care treatment',           duration:45, price:'750',   by:['Caroline'] },
-      { name:'Foot Care',                             desc:'Classic wellness foot treatment',     duration:60, price:'695',   by:['Caroline'] },
-      { name:'Pedicure with Gel Polish',              desc:'Pedicure with gel colour',            duration:85, price:'950',   by:['Caroline'] },
-      { name:'Pedicure with Polish',                  desc:'Pedicure with regular polish',        duration:75, price:'850',   by:['Caroline'] },
-      { name:'Paraffin Bath',                         desc:'Nourishing paraffin treatment',       duration:15, price:'150',   by:['Caroline'] },
     ]},
     { id:'body',       title:'Body Treatments',       treatments:[
       { name:'Anti-Cellulite Massage 30 min',         desc:'Targeted anti-cellulite massage',     duration:30, price:'795',   by:['Caroline'] },
@@ -307,16 +289,24 @@
 
   /* ── Sidebar active on scroll ── */
   const allLinks = document.querySelectorAll('.sidebar-link');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        allLinks.forEach(l => l.classList.remove('active'));
-        const link = document.querySelector(`.sidebar-link[href="#${e.target.id}"]`);
-        if (link) link.classList.add('active');
+  function updateSidebarActive() {
+    const sections = document.querySelectorAll('.service-category');
+    const offset = 120;
+    let current = sections[0]?.id || '';
+    sections.forEach(s => {
+      if (s.getBoundingClientRect().top <= offset) current = s.id;
+    });
+    allLinks.forEach(l => {
+      const active = l.getAttribute('href') === '#' + current;
+      l.classList.toggle('active', active);
+      if (active) {
+        const nav = document.getElementById('sidebarNav');
+        if (nav) nav.scrollTop = l.offsetTop - nav.clientHeight / 2;
       }
     });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  document.querySelectorAll('.service-category').forEach(c => observer.observe(c));
+  }
+  window.addEventListener('scroll', updateSidebarActive, { passive: true });
+  updateSidebarActive();
 
   /* ── Re-apply i18n after dynamic content ── */
   if (typeof applyLanguage === 'function') applyLanguage(typeof currentLang !== 'undefined' ? currentLang : 'en');
