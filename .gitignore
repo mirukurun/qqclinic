@@ -6,3 +6,8 @@
 # Claude Code
 .claude/
 .vercel
+
+# Environment variables — API keys, never commit
+.env
+.env.local
+.env*.local
