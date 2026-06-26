@@ -2328,6 +2328,14 @@ h1, h2, h3, .h1, .h2, .h3 {
 .qqc-chat__send:disabled,
 .qqc-send--loading { opacity: 0.45; cursor: not-allowed; }
 
+.qqc-chat__limit-notice {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+
 /* ── Mobile ─────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .qqc-chat {
