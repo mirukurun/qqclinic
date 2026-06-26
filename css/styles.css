@@ -106,7 +106,7 @@ h1, h2, h3, .h1, .h2, .h3 {
 /* Page fade-in */
 @keyframes pageFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes pageFadeMobile { from { opacity: 0; } to { opacity: 1; } }
-.page-enter { animation: pageFade 0.45s var(--ease-slow) both; }
+.page-enter { animation: pageFade 0.45s var(--ease-slow) backwards; }
 @media (max-width: 768px) {
   /* Без transform — иначе position:fixed дочерних элементов (bottom bar) ломается */
   .page-enter { animation-name: pageFadeMobile; }

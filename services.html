@@ -376,10 +376,11 @@
       catSel.appendChild(o);
     });
 
-    /* Set CSS var so sticky sidebar / scroll-margin know filter bar height */
+    /* Keep CSS var in sync with filter bar height for sidebar/scroll-margin offsets */
     const filterBar = document.getElementById('filterBar');
     function syncFilterHeight() {
-      document.documentElement.style.setProperty('--filter-h', filterBar.offsetHeight + 'px');
+      const h = filterBar.offsetHeight;
+      document.documentElement.style.setProperty('--filter-h', h + 'px');
     }
     syncFilterHeight();
     window.addEventListener('resize', syncFilterHeight);
