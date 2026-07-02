@@ -2779,7 +2779,7 @@ h1, h2, h3, .h1, .h2, .h3 {
   background: var(--white);
   transition: background var(--ease);
 }
-.service-card:hover { background: var(--ivory); }
+.service-card:hover { background: var(--red); border-color: var(--red); }
 .service-card__num {
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.95rem;

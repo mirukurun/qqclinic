@@ -23,6 +23,28 @@ export default function AboutPage() {
         </div>
       </div>
 
+      <section className="carpet-section">
+        <div className="container">
+          <div className="carpet-section__inner">
+            <div className="carpet-img">
+              <span className="carpet-label">Clinic interior — signature detail</span>
+            </div>
+            <div>
+              <span className="label">{t(lang, 'about.carpet.label')}</span>
+              <div style={{ height: '0.75rem' }} />
+              <h2 className="title-lg serif" style={{ marginBottom: 0 }}>{t(lang, 'about.carpet.title')}</h2>
+              <div className="carpet-rule">
+                <div className="carpet-rule-bar" />
+                <span className="carpet-rule-label">Queens Qoncept</span>
+              </div>
+              <p className="carpet-quote">{t(lang, 'about.carpet.q')}</p>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '1rem' }}>{t(lang, 'about.carpet.p1')}</p>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.8' }}>{t(lang, 'about.carpet.p2')}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section section--white">
         <div className="container">
           <div className="about-intro">
@@ -52,28 +74,6 @@ export default function AboutPage() {
                 <div className="stat-item"><div className="stat-num">445+</div><div className="stat-label">{t(lang, 'home.brand.rev.label')}</div></div>
                 <div className="stat-item"><div className="stat-num">17+</div><div className="stat-label">{t(lang, 'home.brand.exp.label')}</div></div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="carpet-section">
-        <div className="container">
-          <div className="carpet-section__inner">
-            <div className="carpet-img">
-              <span className="carpet-label">Clinic interior — signature detail</span>
-            </div>
-            <div>
-              <span className="label">{t(lang, 'about.carpet.label')}</span>
-              <div style={{ height: '0.75rem' }} />
-              <h2 className="title-lg serif" style={{ marginBottom: 0 }}>{t(lang, 'about.carpet.title')}</h2>
-              <div className="carpet-rule">
-                <div className="carpet-rule-bar" />
-                <span className="carpet-rule-label">Queens Qoncept</span>
-              </div>
-              <p className="carpet-quote">{t(lang, 'about.carpet.q')}</p>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.8', marginBottom: '1rem' }}>{t(lang, 'about.carpet.p1')}</p>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.8' }}>{t(lang, 'about.carpet.p2')}</p>
             </div>
           </div>
         </div>
