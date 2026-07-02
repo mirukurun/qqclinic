@@ -26,7 +26,7 @@ export const translations = {
     'home.brand.rat.label': 'Client rating',
     'home.brand.rev': '445+',
     'home.brand.rev.label': 'Reviews',
-    'home.brand.exp': '7+',
+    'home.brand.exp': '17+',
     'home.brand.exp.label': 'Years of expertise',
 
     'home.services.label': 'What we offer',
@@ -167,7 +167,7 @@ export const translations = {
     'home.brand.rat.label': 'Kundbetyg',
     'home.brand.rev': '445+',
     'home.brand.rev.label': 'Recensioner',
-    'home.brand.exp': '7+',
+    'home.brand.exp': '17+',
     'home.brand.exp.label': 'Års erfarenhet',
 
     'home.services.label': 'Vad vi erbjuder',

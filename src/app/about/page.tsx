@@ -50,7 +50,7 @@ export default function AboutPage() {
               <div className="stat-strip">
                 <div className="stat-item"><div className="stat-num">4.9</div><div className="stat-label">{t(lang, 'home.brand.rat.label')}</div></div>
                 <div className="stat-item"><div className="stat-num">445+</div><div className="stat-label">{t(lang, 'home.brand.rev.label')}</div></div>
-                <div className="stat-item"><div className="stat-num">7+</div><div className="stat-label">{t(lang, 'home.brand.exp.label')}</div></div>
+                <div className="stat-item"><div className="stat-num">17+</div><div className="stat-label">{t(lang, 'home.brand.exp.label')}</div></div>
               </div>
             </div>
           </div>
