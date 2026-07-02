@@ -40,12 +40,12 @@ export default function ContactPage() {
                 <div className="contact-block__label">{t(lang, 'contact.address')}</div>
                 <div className="contact-block__value">
                   <a
-                    href="https://maps.google.com/?q=Styrmansgatan+8,+Stockholm"
+                    href="https://maps.google.com/?q=Birger+Jarlsgatan+37,+Stockholm"
                     target="_blank"
                     rel="noopener"
                     className="contact-link"
                   >
-                    Styrmansgatan 8, 114 54 Stockholm
+                    Birger Jarlsgatan 37, 111 45 Stockholm
                   </a>
                 </div>
               </div>

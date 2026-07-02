@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
-const LAT = 59.3326;
-const LNG = 18.0649;
+const LAT = 59.3387;
+const LNG = 18.0681;
 
 export default function Map() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,7 +51,7 @@ export default function Map() {
 
       L.marker([LAT, LNG], { icon })
         .addTo(map)
-        .bindPopup('<b>Queens Qoncept Clinic</b><br>Styrmansgatan 8, Stockholm')
+        .bindPopup('<b>Queens Qoncept Clinic</b><br>Birger Jarlsgatan 37, Stockholm')
         .openPopup();
 
       mapRef.current = map;
