@@ -19,7 +19,7 @@ const TEAM = [
   {
     name: 'Olena',
     role: 'Massage Therapist',
-    bio: 'Certified in Raindrop aromatherapy massage. Olena creates deeply restorative experiences that blend therapeutic skill with an intuitive, healing touch.',
+    bio: 'From deep tissue and hot stone massage to pressotherapy, RF-lifting and sugaring, Olena creates deeply restorative experiences that blend therapeutic skill with an intuitive, healing touch.',
     href: '/specialists#olena',
     img: '/images/olena.jpg',
   },
@@ -39,7 +39,7 @@ const TESTIMONIALS_COL1 = [
 ];
 const TESTIMONIALS_COL2 = [
   { text: '"The most careful brow shaping I have ever experienced. You can see the precision and care in every single detail."', name: 'Elena V.', role: 'Brow styling', initials: 'EV' },
-  { text: '"The Raindrop aromatherapy massage with Olena was the most relaxing experience I have had in years. A true sanctuary."', name: 'Karin M.', role: 'Raindrop massage', initials: 'KM' },
+  { text: '"The hot stone massage with Olena was the most relaxing experience I have had in years. A true sanctuary."', name: 'Karin M.', role: 'Hot stone massage', initials: 'KM' },
   { text: '"After my anti-age facial, several people asked if I had been on holiday. The results speak for themselves."', name: 'Lena P.', role: 'Anti-age facial', initials: 'LP' },
 ];
 const TESTIMONIALS_COL3 = [
